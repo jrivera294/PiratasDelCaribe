@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<maquina id="3">
+	<ip>192.168.110.13</ip>
+	<salida>1-598,0</salida>
+	<salida>2-1196,0</salida>
+	<salida>4-1196,384</salida>
+	<sitioRemoto>1-Puerto Real</sitioRemoto>
+	<sitioRemoto>1-Cala de los Martires</sitioRemoto>
+	<sitioRemoto>1-Playa de las Perlas</sitioRemoto>
+	<sitioRemoto>1-Cayo del Buen Viento</sitioRemoto>
+	<sitioRemoto>1-Cayo de Sotavento</sitioRemoto>
+	<sitioRemoto>2-Puerto de la Reina</sitioRemoto>
+	<sitioRemoto>2-Bahia del Buen Reposo</sitioRemoto>
+	<sitioRemoto>2-Cueva de los Marineros</sitioRemoto>
+	<sitioRemoto>2-Bahia de la Esperanza</sitioRemoto>
+	<sitioRemoto>2-Cueva del Bucanero</sitioRemoto>
+	<sitioRemoto>3-Cueva de los huesos</sitioRemoto>
+	<sitioRemoto>3-Bahia del Buen Retiro</sitioRemoto>
+	<sitioRemoto>3-Bahia de las Flores</sitioRemoto>
+	<sitioRemoto>3-Cementerio de Barcos</sitioRemoto>
+	<sitioRemoto>3-Cayo de Barlovento</sitioRemoto>
+	<sitioRemoto>4-Puerto Rico</sitioRemoto>
+	<sitioRemoto>4-Puerto de las Ballenas</sitioRemoto>
+	<sitioRemoto>4-Bahia del Tesoro Perdido</sitioRemoto>
+	<sitioRemoto>4-Cueva del Pirata</sitioRemoto>
+	<sitioRemoto>4-Cayo de los Pelicanos</sitioRemoto>
+	<sitio>
+		<isla>Isla Tortuga</isla>
+		<nombreSitio>Cueva de los Huesos</nombreSitio>
+		<posX>50</posX>
+		<posY>70</posY>
+		<cofre>
+			<mapa>
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>12</oro>
+			<plata>15</plata>
+			<perlas>6</perlas>
+			<monedasOro>8</monedasOro>
+			<joyas>0</joyas>
+			<piedrasPreciosas>3</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>15</costoComida>
+		<costoTripulacion>12</costoTripulacion>
+		<calamidad>
+			<nombre>Kraken</nombre>
+			<costoHombres>16</costoHombres>
+			<costoMuniciones>9</costoMuniciones>
+			<costoComida>8</costoComida>
+		</calamidad>
+	</sitio>
+	<sitio>
+		<isla>Isla Tortuga</isla>
+		<nombreSitio>Bahia del Buen Retiro</nombreSitio>
+		<posX>240</posX>
+		<posY>200</posY>
+		<cofre>
+			<mapa>
+				<ruta>1-Playa de las Perlas</ruta>
+				<ruta>1-Cayo del Buen Viento</ruta>
+				<ruta>2-Cueva de los Marineros</ruta>
+				<ruta>2-Puerto de la Reina</ruta>
+				<ruta>4-Puerto de las Ballenas</ruta>	
+				<ruta>3-Cayo de Barlovento</ruta>
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>8</oro>
+			<plata>9</plata>
+			<perlas>5</perlas>
+			<monedasOro>3</monedasOro>
+			<joyas>7</joyas>
+			<piedrasPreciosas>3</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>10</costoComida>
+		<costoTripulacion>12</costoTripulacion>
+	</sitio>
+	<sitio>
+		<isla>Isla las Aves</isla>
+		<nombreSitio>Bahia de las Flores</nombreSitio>
+		<posX>350</posX>
+		<posY>350</posY>
+		<cofre>
+			<mapa>
+				
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>5</oro>
+			<plata>6</plata>
+			<perlas>9</perlas>
+			<monedasOro>5</monedasOro>
+			<joyas>4</joyas>
+			<piedrasPreciosas>4</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>7</costoComida>
+		<costoTripulacion>5</costoTripulacion>
+	</sitio>
+	<sitio>
+		<isla>Isla las Aves</isla>
+		<nombreSitio>Cementerio de Barcos</nombreSitio>
+		<posX>580</posX>
+		<posY>500</posY>
+		<cofre>
+			<mapa>
+				
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>6</oro>
+			<plata>7</plata>
+			<perlas>4</perlas>
+			<monedasOro>3</monedasOro>
+			<joyas>8</joyas>
+			<piedrasPreciosas>3</piedrasPreciosas>
+			<corazonPrincesa>1</corazonPrincesa>
+		</cofre>
+		<costoComida>17</costoComida>
+		<costoTripulacion>8</costoTripulacion>
+	</sitio>
+	<sitio>
+		<nombreSitio>Cayo de Barlovento</nombreSitio>
+		<posX>800</posX>
+		<posY>480</posY>
+		<cofre>
+			<mapa>
+				
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>3</oro>
+			<plata>5</plata>
+			<perlas>12</perlas>
+			<monedasOro>3</monedasOro>
+			<joyas>3</joyas>
+			<piedrasPreciosas>4</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>8</costoComida>
+		<costoTripulacion>11</costoTripulacion>
+		<calamidad>
+			<nombre>Tormenta</nombre>
+			<costoHombres>10</costoHombres>
+			<costoMuniciones>11</costoMuniciones>
+			<costoComida>19</costoComida>
+		</calamidad>
+	</sitio>
+</maquina>

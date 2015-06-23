@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<maquina id="2">
+	<ip>192.168.110.12</ip>
+	<salida>1-0,384</salida>
+	<salida>3-0,768</salida>
+	<salida>4-598,768</salida>
+	<sitioRemoto>1-Puerto Real</sitioRemoto>
+	<sitioRemoto>1-Cala de los Martires</sitioRemoto>
+	<sitioRemoto>1-Playa de las Perlas</sitioRemoto>
+	<sitioRemoto>1-Cayo del Buen Viento</sitioRemoto>
+	<sitioRemoto>1-Cayo de Sotavento</sitioRemoto>
+	<sitioRemoto>2-Puerto de la Reina</sitioRemoto>
+	<sitioRemoto>2-Bahia del Buen Reposo</sitioRemoto>
+	<sitioRemoto>2-Cueva de los Marineros</sitioRemoto>
+	<sitioRemoto>2-Bahia de la Esperanza</sitioRemoto>
+	<sitioRemoto>2-Cueva del Bucanero</sitioRemoto>
+	<sitioRemoto>3-Cueva de los huesos</sitioRemoto>
+	<sitioRemoto>3-Bahia del Buen Retiro</sitioRemoto>
+	<sitioRemoto>3-Bahia de las Flores</sitioRemoto>
+	<sitioRemoto>3-Cementerio de Barcos</sitioRemoto>
+	<sitioRemoto>3-Cayo de Barlovento</sitioRemoto>
+	<sitioRemoto>4-Puerto Rico</sitioRemoto>
+	<sitioRemoto>4-Puerto de las Ballenas</sitioRemoto>
+	<sitioRemoto>4-Bahia del Tesoro Perdido</sitioRemoto>
+	<sitioRemoto>4-Cueva del Pirata</sitioRemoto>
+	<sitioRemoto>4-Cayo de los Pelicanos</sitioRemoto>
+	<barco>
+		<nombre>Invencible</nombre>
+		<rutaOrigen>2-Puerto de la Reina</rutaOrigen>
+		<maxTripulacion>160</maxTripulacion>
+		<maxComida>120</maxComida>
+		<maxMuniciones>180</maxMuniciones>
+		<tipo>2</tipo>
+		<cofre>
+			<capacidad>50</capacidad>
+		</cofre>
+	</barco>
+	<barco>
+		<nombre>Interceptor</nombre>
+		<rutaOrigen>2-Puerto de la Reina</rutaOrigen>
+		<maxTripulacion>180</maxTripulacion>
+		<maxComida>160</maxComida>
+		<maxMuniciones>190</maxMuniciones>
+		<tipo>2</tipo>
+		<cofre>
+			<capacidad>50</capacidad>
+		</cofre>
+	</barco>
+	<sitio>
+		<isla>Isla La Holandesa</isla>
+		<nombreSitio>Puerto de la Reina</nombreSitio>
+		<posX>950</posX>
+		<posY>500</posY>
+		<cofre>
+			<mapa>
+				
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>2</oro>
+			<plata>5</plata>
+			<perlas>1</perlas>
+			<monedasOro>5</monedasOro>
+			<joyas>3</joyas>
+			<piedrasPreciosas>6</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>5</costoComida>
+		<costoTripulacion>12</costoTripulacion>
+	</sitio>
+	<sitio>
+		<isla>Isla La Holandesa</isla>
+		<nombreSitio>Bahia del Buen Reposo</nombreSitio>
+		<posX>750</posX>
+		<posY>300</posY>
+		<cofre>
+			<mapa>
+				
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>8</oro>
+			<plata>3</plata>
+			<perlas>6</perlas>
+			<monedasOro>7</monedasOro>
+			<joyas>2</joyas>
+			<piedrasPreciosas>4</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>3</costoComida>
+		<costoTripulacion>5</costoTripulacion>
+	</sitio>
+	<sitio>
+		<isla>Isla La Holandesa</isla>
+		<nombreSitio>Cueva de los Marineros</nombreSitio>
+		<posX>800</posX>
+		<posY>200</posY>
+		<cofre>
+			<mapa>
+				<ruta>1-Cayo del Buen Viento</ruta>
+				<ruta>4-Bahia del Tesoro Perdido</ruta>
+				<ruta>2-Bahia de la Esperanza</ruta>
+				<ruta>3-Cueva de los Huesos</ruta>	
+				<ruta>4-Cayo de los Pelicanos</ruta>
+				<ruta>1-Puerto Real</ruta>
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>3</oro>
+			<plata>5</plata>
+			<perlas>4</perlas>
+			<monedasOro>9</monedasOro>
+			<joyas>4</joyas>
+			<piedrasPreciosas>2</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>13</costoComida>
+		<costoTripulacion>9</costoTripulacion>
+	</sitio>
+	<sitio>
+		<isla>Isla del Naufrago</isla>
+		<nombreSitio>Bahia de la Esperanza</nombreSitio>
+		<posX>700</posX>
+		<posY>50</posY>
+		<cofre>
+			<mapa>
+				
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>10</oro>
+			<plata>5</plata>
+			<perlas>7</perlas>
+			<monedasOro>3</monedasOro>
+			<joyas>2</joyas>
+			<piedrasPreciosas>0</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>9</costoComida>
+		<costoTripulacion>15</costoTripulacion>
+	</sitio>
+	<sitio>
+		<isla>Isla del Naufrago</isla>
+		<nombreSitio>Cueva del Bucanero</nombreSitio>
+		<posX>600</posX>
+		<posY>10</posY>
+		<cofre>
+			<mapa>
+				<ruta>4-Puerto Rico</ruta>
+				<ruta>4-Cayo de los Pelicanos</ruta>
+				<ruta>3-Bahia de las Flores</ruta>
+				<ruta>1-Cayo de Sotavento</ruta>	
+				<ruta>1-Cala de los Martires</ruta>
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>15</oro>
+			<plata>4</plata>
+			<perlas>8</perlas>
+			<monedasOro>6</monedasOro>
+			<joyas>3</joyas>
+			<piedrasPreciosas>5</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>7</costoComida>
+		<costoTripulacion>11</costoTripulacion>
+		<calamidad>
+			<nombre>Tornado</nombre>
+			<costoHombres>6</costoHombres>
+			<costoMuniciones>10</costoMuniciones>
+			<costoComida>13</costoComida>
+		</calamidad>
+	</sitio>
+</maquina>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<maquina id="1">
+	<ip>192.168.110.11</ip>
+	<salida>2-1196,384</salida>
+	<salida>3-598,768</salida>
+	<salida>4-1196,384</salida>
+	<sitioRemoto>1-Puerto Real</sitioRemoto>
+	<sitioRemoto>1-Cala de los Martires</sitioRemoto>
+	<sitioRemoto>1-Playa de las Perlas</sitioRemoto>
+	<sitioRemoto>1-Cayo del Buen Viento</sitioRemoto>
+	<sitioRemoto>1-Cayo de Sotavento</sitioRemoto>
+	<sitioRemoto>2-Puerto de la Reina</sitioRemoto>
+	<sitioRemoto>2-Bahia del Buen Reposo</sitioRemoto>
+	<sitioRemoto>2-Cueva de los Marineros</sitioRemoto>
+	<sitioRemoto>2-Bahia de la Esperanza</sitioRemoto>
+	<sitioRemoto>2-Cueva del Bucanero</sitioRemoto>
+	<sitioRemoto>3-Cueva de los huesos</sitioRemoto>
+	<sitioRemoto>3-Bahia del Buen Retiro</sitioRemoto>
+	<sitioRemoto>3-Bahia de las Flores</sitioRemoto>
+	<sitioRemoto>3-Cementerio de Barcos</sitioRemoto>
+	<sitioRemoto>3-Cayo de Barlovento</sitioRemoto>
+	<sitioRemoto>4-Puerto Rico</sitioRemoto>
+	<sitioRemoto>4-Puerto de las Ballenas</sitioRemoto>
+	<sitioRemoto>4-Bahia del Tesoro Perdido</sitioRemoto>
+	<sitioRemoto>4-Cueva del Pirata</sitioRemoto>
+	<sitioRemoto>4-Cayo de los Pelicanos</sitioRemoto>
+	<barco>
+		<nombre>Venganza Errante</nombre>
+		<rutaOrigen>1-Puerto Real</rutaOrigen>
+		<maxTripulacion>150</maxTripulacion>
+		<maxComida>180</maxComida>
+		<maxMuniciones>160</maxMuniciones>
+		<tipo>1</tipo>
+		<cofre>
+			<capacidad>100</capacidad>
+		</cofre>
+	</barco>
+	<sitio>
+		<isla>Isla Nueva Esperanzas</isla>
+		<nombreSitio>Puerto Real</nombreSitio>
+		<posX>500</posX>
+		<posY>200</posY>
+		<cofre>
+			<mapa>	
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>2</oro>
+			<plata>5</plata>
+			<perlas>1</perlas>
+			<monedasOro>5</monedasOro>
+			<joyas>3</joyas>
+			<piedrasPreciosas>6</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>5</costoComida>
+		<costoTripulacion>12</costoTripulacion>
+	</sitio>
+	<sitio>
+		<isla>Isla Nueva Esperanzas</isla>
+		<nombreSitio>Cala de los Martires</nombreSitio>
+		<posX>300</posX>
+		<posY>300</posY>
+		<cofre>
+			<mapa>
+				<ruta>3-Cueva de los Huesos</ruta>
+				<ruta>3-Cayo Barlovento</ruta>
+				<ruta>4-Cueva del Pirata</ruta>
+				<ruta>4-Puerto Rico</ruta>	
+				<ruta>2-Bahia del Buen Reposo</ruta>
+				<ruta>3-Cementerio de Barcos</ruta>
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>4</oro>
+			<plata>3</plata>
+			<perlas>3</perlas>
+			<monedasOro>2</monedasOro>
+			<joyas>4</joyas>
+			<piedrasPreciosas>5</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>10</costoComida>
+		<costoTripulacion>2</costoTripulacion>
+		<calamidad>
+			<nombre>Kraken</nombre>
+			<costoHombres>6</costoHombres>
+			<costoMuniciones>4</costoMuniciones>
+			<costoComida>5</costoComida>
+		</calamidad>
+	</sitio>
+		<sitio>
+		<isla>Isla Nueva Esperanzas</isla>
+		<nombreSitio>Playa de las Perlas</nombreSitio>
+		<posX>180</posX>
+		<posY>350</posY>
+		<cofre>
+			<mapa>	
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>5</oro>
+			<plata>6</plata>
+			<perlas>10</perlas>
+			<monedasOro>5</monedasOro>
+			<joyas>3</joyas>
+			<piedrasPreciosas>2</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>3</costoComida>
+		<costoTripulacion>5</costoTripulacion>
+	</sitio>
+	<sitio>
+		<nombreSitio>Cayo del Buen Viento</nombreSitio>
+		<posX>500</posX>
+		<posY>500</posY>
+		<cofre>
+			<mapa>
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>2</oro>
+			<plata>5</plata>
+			<perlas>1</perlas>
+			<monedasOro>5</monedasOro>
+			<joyas>3</joyas>
+			<piedrasPreciosas>6</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>5</costoComida>
+		<costoTripulacion>12</costoTripulacion>
+	</sitio>
+	<sitio>
+		<nombreSitio>Cayo de Sotavento</nombreSitio>
+		<posX>500</posX>
+		<posY>60</posY>
+		<cofre>
+			<mapa>				
+			</mapa>
+			<capacidad>1000</capacidad>
+			<oro>2</oro>
+			<plata>5</plata>
+			<perlas>1</perlas>
+			<monedasOro>5</monedasOro>
+			<joyas>3</joyas>
+			<piedrasPreciosas>6</piedrasPreciosas>
+			<corazonPrincesa>0</corazonPrincesa>
+		</cofre>
+		<costoComida>5</costoComida>
+		<costoTripulacion>2</costoTripulacion>
+		<calamidad>
+			<nombre>Tormenta</nombre>
+			<costoHombres>3</costoHombres>
+			<costoMuniciones>6</costoMuniciones>
+			<costoComida>4</costoComida>
+		</calamidad>
+	</sitio>
+</maquina>
