@@ -127,7 +127,6 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                         if (dato[0].equals(ip[0]) == true){
                             if (barco.llamadaRMI(ip[1], dato[0]+"-"+dato[1], maquina.getId()) == false){
                                 System.out.println("Error LlamadaRMI: No se pudo enviar el Barco.");
-                                flag = true;
                             }
                             break;
                         }
@@ -145,7 +144,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                     }
                 }
 
-                if (flag == true){
+                //if (flag == true){
                     for (int i=0; i < maquina.getSitio().size(); i++){
                         if (dato[1].equals(maquina.getSitio().get(i).getNombreSitio()) == true){
                             //Retorna true: Cuando se queda sin recursos.
@@ -170,7 +169,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             break;
                         }
                     }
-                }
+                //}
                 barco.getCofre().getMapa().setSitioActual();
                 dato = barco.getCofre().getMapa().getRuta().get(barco.getCofre().getMapa().getSitioActual()).split("-");
                 try {
