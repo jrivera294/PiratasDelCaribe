@@ -122,23 +122,23 @@ public class Barco extends javax.swing.JLabel{
         /*Imagenes*/
         switch (nombreBarco){
             case "Venganza Errante":
-                imageBarco = new ImageIcon(filePath + "/src/images/barcoPirata.png");
-                kraken =  new ImageIcon(filePath + "/src/images/barcoPkraken.png");
-                tornado = new ImageIcon(filePath + "/src/images/barcoPtornado.png");
-                tormenta = new ImageIcon(filePath + "/src/images/barcoPtormenta.png");
+                imageBarco = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "barcoPirata.png");
+                kraken =  new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "barcoPkraken.png");
+                tornado = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "barcoPtornado.png");
+                tormenta = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "barcoPtormenta.png");
                 
                 break;
             case "Interceptor": 
-                imageBarco = new ImageIcon(filePath + "/src/images/interceptorBarco.png");
-                kraken =  new ImageIcon(filePath + "/src/images/intercepkraken.png");
-                tornado = new ImageIcon(filePath + "/src/images/interceptornado.png");
-                tormenta = new ImageIcon(filePath + "/src/images/interceptormenta.png");
+                imageBarco = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "interceptorBarco.png");
+                kraken =  new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "intercepkraken.png");
+                tornado = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "interceptornado.png");
+                tormenta = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "interceptormenta.png");
                 break;
             case "Invencible": 
-                imageBarco = new ImageIcon(filePath + "/src/images/invenBarco.png");
-                kraken =  new ImageIcon(filePath + "/src/images/invenkraken.png");
-                tornado = new ImageIcon(filePath + "/src/images/inventornado.png");
-                tormenta = new ImageIcon(filePath + "/src/images/inventormenta.png");
+                imageBarco = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "invenBarco.png");
+                kraken =  new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "invenkraken.png");
+                tornado = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "inventornado.png");
+                tormenta = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "inventormenta.png");
                 break;    
         }
         labelBarco.setIcon(this.imageBarco);
