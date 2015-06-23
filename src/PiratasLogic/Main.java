@@ -97,7 +97,7 @@ public class Main {
            numPuerto = Integer.toString(8050);
            System.out.println("Iniciando server RMI. Port:  "+numPuerto);
            arrancarRegistro(numPuerto);
-           RemoteClass objetoRemoto = new RemoteClass(objeto,graphicInterface.getPanelPrincipal());
+           RemoteClass objetoRemoto = new RemoteClass(objeto,graphicInterface);
            URLRegistro = "rmi://192.168.110.102:"+numPuerto+"/barco";
            
            Naming.rebind(URLRegistro,objetoRemoto);

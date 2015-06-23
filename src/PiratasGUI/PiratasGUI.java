@@ -60,21 +60,21 @@ public class PiratasGUI extends javax.swing.JFrame {
      */
     public void setEstadoBarcos(String NombreBarco, int ValorTripulacion, int ValorMuniciones, int ValorComida, int ValorCofre){
         switch(NombreBarco){
-            case "pirata":
+            case "Venganza Errante":
                 this.barcoPirata_Tripulacion.setText(ValorTripulacion + "");
                 this.barcoPirata_Municiones.setText(ValorMuniciones + "");
                 this.barcoPirata_Comida.setText(ValorComida + "");
                 this.barcoPirata_Cofre.setText(ValorCofre + "");
                 break;
                 
-            case "interceptor":   
+            case "Interceptor":   
                 this.barcoInterceptor_Tripulacion.setText(ValorTripulacion + "");
                 this.barcoInterceptor_Municiones.setText(ValorMuniciones + "");
                 this.barcoInterceptor_Comida.setText(ValorComida + "");
                 this.barcoInterceptor_Cofre.setText(ValorCofre + "");
                 break;
                 
-            case "invencible":   
+            case "Invencible":   
                 this.barcoInvencible_Tripulacion.setText(ValorTripulacion + "");
                 this.barcoInvencible_Municiones.setText(ValorMuniciones + "");
                 this.barcoInvencible_Comida.setText(ValorComida + "");

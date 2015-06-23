@@ -1,11 +1,15 @@
 package PiratasLogic;
 
+import PiratasGUI.BarcoGUI;
+import PiratasGUI.PiratasGUI;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,11 +25,22 @@ public class Barco implements java.io.Serializable{
     private int maxTripulacion;
     private int maxComida;
     private int maxMuniciones;
+    private BarcoGUI barcoGUI;
+    private PiratasGUI graphicInterface;
 
     public void reabastecer(){
         this.setTripulacion(this.getMaxTripulacion());
         this.setComida(this.getMaxComida());
         this.setMuniciones(this.getMaxMuniciones());
+        this.graphicInterface.setEstadoBarcos(this.nombre, this.tripulacion, this.municiones, this.comida, this.cofre.getCapacidadActual());
+    }
+
+    public void setBarcoGUI(BarcoGUI barcoGUI) {
+        this.barcoGUI = barcoGUI;
+    }
+
+    public void setGraphicInterface(PiratasGUI graphicInterface) {
+        this.graphicInterface = graphicInterface;
     }
     
     public void setMaxTripulacion(int maxTripulacion) {
@@ -116,6 +131,7 @@ public class Barco implements java.io.Serializable{
             }
             sitio.getCofre().setCorazonPrincesa(0);
             this.cofre.setCorazonPrincesa((int)Cofre.pesoCorazon);
+            this.graphicInterface.setEstadoBarcos(this.nombre, this.tripulacion, this.municiones, this.comida, this.cofre.getCapacidadActual());
             return true;
         }
     
@@ -177,6 +193,8 @@ public class Barco implements java.io.Serializable{
             }
         }
         
+        this.graphicInterface.setEstadoBarcos(this.nombre, this.tripulacion, this.municiones, this.comida, this.cofre.getCapacidadActual());
+
         return false;
     }
     
@@ -196,15 +214,22 @@ public class Barco implements java.io.Serializable{
             this.municiones -= sitio.getCalamidad().getCostoMuniciones();
             this.tripulacion -= sitio.getCalamidad().getCostoHombres();
             
-            //Ejecutar calamidad
+            this.barcoGUI.setCalamidadBarco(sitio.getCalamidad().getNombre());
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Barco.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.barcoGUI.setCalamidadBarco("");
         }
+        
+        this.graphicInterface.setEstadoBarcos(this.nombre, this.tripulacion, this.municiones, this.comida, this.cofre.getCapacidadActual());
         
         if(this.comida <= this.maxComida/3 || this.municiones <= this.maxMuniciones/3
            || this.tripulacion <= this.maxTripulacion/3){
             return true;
         }
         //Si tiene menos de 1/3 de recursos retornar true
-        
         return false;
     }
     
