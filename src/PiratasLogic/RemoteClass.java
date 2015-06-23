@@ -5,11 +5,13 @@
  */
 package PiratasLogic;
 
+import PiratasGUI.BarcoGUI;
 import static java.lang.Integer.parseInt;
 import java.rmi.*;
 import java.rmi.server.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
 
 
 /**
@@ -18,27 +20,20 @@ import java.util.logging.Logger;
  */
 public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
     private Maquina maquina;
+    private final JPanel panelPrincipal;
     
-    public RemoteClass(Maquina maquina) throws RemoteException{
+    public RemoteClass(Maquina maquina, JPanel panelPrincipal) throws RemoteException{
         super();
         this.maquina = maquina;
+        this.panelPrincipal = panelPrincipal;
     }
     
     @Override
     public boolean desembarcar(Barco barco, String nombreSitio, int idMaquina) throws RemoteException{
-        String id[];
-        for (int i=0; i < this.maquina.getPuntoSalida().size(); i++){
-            id = this.maquina.getPuntoSalida().get(i).split("-");
-            
-            if (idMaquina == parseInt(id[0])){
-                //aparecer el barco
-                Hilo hilo = new Hilo(barco,nombreSitio);
-        
-                hilo.start();
-                break;
-            }
-        }     
-        
+
+        Hilo hilo = new Hilo(barco,nombreSitio,this.panelPrincipal,this.maquina);
+        hilo.start();
+
         System.out.println("Objeto remoto enviado exitosamente");
         System.out.println("Nombre barco: "+barco.getNombre() +" -- Va: "+nombreSitio);
 
@@ -48,10 +43,16 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
     public class Hilo extends Thread {
         private Barco barco;
         private String nombreSitio;
+        private JPanel panelPrincipal;
+        private BarcoGUI barcoGUI;
+        private Maquina maquina;
 
-        public Hilo(Barco barco, String nombreSitio) {
+        public Hilo(Barco barco, String nombreSitio, JPanel panelPrincipal, Maquina maquina) {
             this.barco = barco;
             this.nombreSitio = nombreSitio;
+            this.panelPrincipal = panelPrincipal;
+            this.maquina = maquina;
+            barcoGUI = new BarcoGUI(panelPrincipal,barco.getNombre());
         }
 
         @Override
@@ -59,6 +60,22 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
             String dato[];
             dato = nombreSitio.split("-");
             Boolean flag = false; 
+            int xOrigen, yOrigen;
+            String idOrigen;
+            
+            //Obtener el id de la maquina de donde viene el barco
+            if(barco.getCofre().getMapa() == null){
+                idOrigen = barco.getRutaOrigen().split("-")[0];
+            }else{
+                idOrigen = barco.getCofre().getMapa().getRuta().get(barco.getCofre()
+                        .getMapa().getSitioActual()-1).split("-")[0];
+            }
+            
+            // Obtener el punto donde debe aparecer el barco
+            xOrigen = parseInt(maquina.getPuntoSalida(idOrigen).split("-")[0].split(",")[0]);
+            yOrigen = parseInt(maquina.getPuntoSalida(idOrigen).split("-")[0].split(",")[1]);
+            
+            barcoGUI.AparecerBarco(xOrigen, yOrigen);
             
             //Determinar si viene a la base
             if (nombreSitio.equals(barco.getRutaOrigen()) == true){                

@@ -1,5 +1,6 @@
 package PiratasLogic;
 
+import PiratasGUI.PiratasGUI;
 import java.io.File;
 import java.util.List;
 import javax.xml.bind.JAXBContext;
@@ -32,7 +33,7 @@ public class Main {
         BufferedReader buf = new BufferedReader(ent);
         String numPuerto, URLRegistro;
        
-        System.setProperty("java.rmi.server.hostname", "192.168.110.102");
+        System.setProperty("java.rmi.server.hostname", "192.168.110.137");
         
         try {
  
@@ -87,13 +88,16 @@ public class Main {
 		System.out.println("error");
 	  }
         
-        //RMI Server
+        // Interfaz gráfica
+        PiratasGUI graphicInterface = new PiratasGUI();
+        graphicInterface.setVisible(true);
         
+        // RMI Server
         try{
            numPuerto = Integer.toString(8050);
            System.out.println("Iniciando server RMI. Port:  "+numPuerto);
            arrancarRegistro(numPuerto);
-           RemoteClass objetoRemoto = new RemoteClass(objeto);
+           RemoteClass objetoRemoto = new RemoteClass(objeto,graphicInterface.getPanelPrincipal());
            URLRegistro = "rmi://192.168.110.102:"+numPuerto+"/barco";
            
            Naming.rebind(URLRegistro,objetoRemoto);
@@ -104,7 +108,7 @@ public class Main {
            System.out.println("Excepción en el servidor.main:"+excr);
        } catch (MalformedURLException excr) {
            System.out.println("Excepción en el servidor.main:"+excr);
-        }
+       }
     }
 
     private static void arrancarRegistro(String nroPuertoRMI) throws RemoteException{

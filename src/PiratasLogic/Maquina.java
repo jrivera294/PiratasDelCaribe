@@ -51,8 +51,13 @@ public class Maquina {
         return ip;
     }
 
-    public List<String> getPuntoSalida() {
-        return puntoSalida;
+    public String getPuntoSalida(String id) {
+        for (String puntoSalida1 : this.puntoSalida) {
+            if(puntoSalida1.split("-")[0].equals(id)){
+                return puntoSalida1;
+            }
+        }
+        return null;
     }
 
     @XmlElement(name = "ipRemota")
