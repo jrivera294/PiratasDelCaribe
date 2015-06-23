@@ -60,6 +60,10 @@ public class Maquina {
         return null;
     }
 
+    public List<String> getPuntoSalida() {
+        return puntoSalida;
+    }
+
     @XmlElement(name = "ipRemota")
     public void setIpRemota(List<String> ipRemota) {
         this.ipRemota = ipRemota;
