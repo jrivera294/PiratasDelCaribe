@@ -7,6 +7,8 @@ package PiratasGUI;
 
 import java.awt.Color;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -106,7 +108,7 @@ public class PiratasGUI extends javax.swing.JFrame {
         barcoPirata_Comida = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         barcoPirata_Cofre = new javax.swing.JLabel();
-        barcoReinainf2 = new FondoPanel("/images/interceptor.png");
+        barcoReinainf2 = new FondoPanel("/images/invencible.png");
         panelBarcoEstadistica2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -121,7 +123,7 @@ public class PiratasGUI extends javax.swing.JFrame {
         barcoInvencible_Comida = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         barcoInvencible_Cofre = new javax.swing.JLabel();
-        barcoReinainf = new FondoPanel("/images/invencible.png");
+        barcoReinainf = new FondoPanel("/images/interceptor.png");
         panelBarcoEstadistica1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -439,6 +441,8 @@ public class PiratasGUI extends javax.swing.JFrame {
         getContentPane().add(barcoReinainf2);
         barcoReinainf2.setBounds(10, 490, 158, 240);
 
+        barcoReinainf.setPreferredSize(new java.awt.Dimension(158, 240));
+
         panelBarcoEstadistica1.setBackground(new Color(0,0,0,0));
         panelBarcoEstadistica1.setMaximumSize(new java.awt.Dimension(90, 240));
         panelBarcoEstadistica1.setMinimumSize(new java.awt.Dimension(90, 240));
@@ -581,7 +585,7 @@ public class PiratasGUI extends javax.swing.JFrame {
         );
 
         getContentPane().add(barcoReinainf);
-        barcoReinainf.setBounds(10, 247, 220, 240);
+        barcoReinainf.setBounds(10, 247, 158, 240);
 
         iniciar.setText("Iniciar");
         iniciar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -602,8 +606,8 @@ public class PiratasGUI extends javax.swing.JFrame {
 
     private void iniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarMouseClicked
         // TODO add your handling code here:
-        this.BarcoMovement.AparecerBarco(950, 500);
-        this.BarcoMovement.CrearHilo(800,200);   //Revisar
+        //this.BarcoMovement.AparecerBarco(10, 100);
+        this.BarcoMovement.CrearHilo(10,100,800,200);   //Revisar
         this.BarcoMovement.movimiento.start();
     }//GEN-LAST:event_iniciarMouseClicked
 /*Lista de String de sitios, leer cada una y setear*/
