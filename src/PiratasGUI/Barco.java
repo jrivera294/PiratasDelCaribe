@@ -22,7 +22,7 @@ public class Barco extends javax.swing.JLabel{
     private final AnimationClass barcoAnimated;
     private JLabel labelBarco;
     public Hilo movimiento;
-    private int llegada;
+    public int llegada;
     private JPanel panel;
     private int posx, posy, posx1, posy1;
     private int movX, movY;
@@ -32,16 +32,35 @@ public class Barco extends javax.swing.JLabel{
     private ImageIcon imageBarco, kraken, tormenta, tornado ;
 
     class Hilo extends Thread {
+        private BarcoGUI ship;
+        private JPanel pan;
         
-        public Hilo(int x, int y, int x1, int y1){
+        public Hilo(int x, int y, int x1, int y1, JPanel p){
             posx = x;
             posx1 = x1;
             posy = y;
             posy1 = y1;
+            pan = p;
+            ship = new BarcoGUI(pan, "Venganza Errante");
         }
 
         public void run() {
-            
+            ship.AparecerBarco(posx, posy);
+            if(ship.MoverBarco(posx1, posy1)){
+                System.out.println("Termino 1er mov");
+            }
+            if(ship.MoverBarco(60, 200)){
+                System.out.println("Termino 2do mov");
+            }
+            if(ship.MoverBarco(300, 200)){
+                System.out.println("Termino 3er mov");
+            }
+            ship.setCalamidadBarco("Tornado");
+        //    ship.OcultarBarco();
+        }
+    }
+    
+    public void MoverBarco(){
             if(posx1 >= posx){
                 movX = 1;   // El punto al que queremos movernos esta a la derecha
             }else
@@ -112,7 +131,7 @@ public class Barco extends javax.swing.JLabel{
                default:labelBarco.setIcon(imageBarco); break;    
            }
         }
-    }
+    
         
     public Barco(JPanel p, String nombreBarco){
         panel = p;
@@ -150,8 +169,8 @@ public class Barco extends javax.swing.JLabel{
     * @param x1 Posicion en el eje X de la pantalla donde el Barco Terminara el movimiento
     * @param y1 Posicion en el eje Y de la pantalla donde el Barco Terminara el movimiento
     */
-   public void CrearHilo(int x1, int y1){ 
-       movimiento = new Hilo(labelBarco.getX(),labelBarco.getY(),x1,y1);
+   public void CrearHilo(int x, int y, int x1, int y1){ 
+       movimiento = new Hilo(x,y,x1,y1, panel);
    }
    
    /**

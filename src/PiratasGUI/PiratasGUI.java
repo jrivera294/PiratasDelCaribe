@@ -7,6 +7,8 @@ package PiratasGUI;
 
 import java.awt.Color;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -604,8 +606,8 @@ public class PiratasGUI extends javax.swing.JFrame {
 
     private void iniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarMouseClicked
         // TODO add your handling code here:
-        this.BarcoMovement.AparecerBarco(10, 100);
-        this.BarcoMovement.CrearHilo(800,200);   //Revisar
+        //this.BarcoMovement.AparecerBarco(10, 100);
+        this.BarcoMovement.CrearHilo(10,100,800,200);   //Revisar
         this.BarcoMovement.movimiento.start();
     }//GEN-LAST:event_iniciarMouseClicked
 /*Lista de String de sitios, leer cada una y setear*/
