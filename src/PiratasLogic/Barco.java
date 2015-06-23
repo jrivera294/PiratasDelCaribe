@@ -32,7 +32,6 @@ public class Barco implements java.io.Serializable{
         this.setTripulacion(this.getMaxTripulacion());
         this.setComida(this.getMaxComida());
         this.setMuniciones(this.getMaxMuniciones());
-        this.graphicInterface.setEstadoBarcos(this.nombre, this.tripulacion, this.municiones, this.comida, this.cofre.getCapacidadActual());
     }
 
     public void setBarcoGUI(BarcoGUI barcoGUI) {
