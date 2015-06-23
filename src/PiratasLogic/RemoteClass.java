@@ -143,11 +143,20 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             //Retorna true: Cuando se queda sin recursos.
                             if (barco.descontarRecursos(maquina.getSitio().get(i)) == true){
                                 //Hacer llamada RMI al punto de origen de barco.
-                                this.barco.llamadaRMI("192.168", nombreSitio, parseInt(dato[0]));
+                                for(String ipRemota: maquina.getIpRemota()){
+                                    if(barco.getRutaOrigen().split("-")[0].equals(ipRemota.split("-")[0])){
+                                        this.barco.llamadaRMI(ipRemota.split("-")[1], nombreSitio, parseInt(ipRemota.split("-")[0]));
+                                    }
+                                }
                                 return;
                             //Recoger: True si encontro el corazon de la princesa    
                             }else if (barco.recoger(maquina.getSitio().get(i)) == true){
                                 //Hacer llamada RMI al punto de origen de barco.
+                                for(String ipRemota: maquina.getIpRemota()){
+                                    if(barco.getRutaOrigen().split("-")[0].equals(ipRemota.split("-")[0])){
+                                        this.barco.llamadaRMI(ipRemota.split("-")[1], nombreSitio, parseInt(ipRemota.split("-")[0]));
+                                    }
+                                }
                                 return;
                             }
                             break;
