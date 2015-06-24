@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <maquina id="2">
-	<ip>192.168.110.12</ip>
+	<ip>192.168.110.137</ip>
 	<salida>1-0,384</salida>
 	<salida>3-0,768</salida>
 	<salida>4-598,768</salida>
