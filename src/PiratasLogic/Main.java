@@ -23,6 +23,7 @@ public class Main {
 
     public static void main(String[] args) {
         int i, cofres;
+        Barco barco;
         Maquina objeto = null;
         List<String> ruta;
         String nCalamidad;
@@ -42,12 +43,6 @@ public class Main {
  
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 		objeto = (Maquina) jaxbUnmarshaller.unmarshal(file);
-                
-                Barco barco = objeto.getBarco();
-                Cofre cBarco = new Cofre(objeto.getBarco().getCofre().getCapacidad());
-                
-                barco.setCofre(cBarco);
-                barco.reabastecer();
                 
                 System.out.println(objeto.getSitioRemoto());
                 
@@ -109,6 +104,12 @@ public class Main {
        } catch (MalformedURLException excr) {
            System.out.println("Excepción en el servidor.main:"+excr);
        }
+       
+        barco = objeto.getBarco();
+        Cofre cBarco = new Cofre(objeto.getBarco().getCofre().getCapacidad());
+
+        barco.setCofre(cBarco);
+        barco.reabastecer();
     }
 
     private static void arrancarRegistro(String nroPuertoRMI) throws RemoteException{
