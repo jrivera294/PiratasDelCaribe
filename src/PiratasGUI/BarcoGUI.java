@@ -18,29 +18,12 @@ import javax.swing.JPanel;
 public class BarcoGUI extends javax.swing.JLabel{
     private final AnimationClass barcoAnimated;
     private JLabel labelBarco;
-    public Hilo movimiento;
     public int llegada;
     private JPanel panel;
-    private int posx, posy, posx1, posy1;
-    private int movX, movY;
     private String filePath = new File("").getAbsolutePath();
     
     /*Imagenes*/
     private ImageIcon imageBarco, kraken, tormenta, tornado ;
-
-    class Hilo extends Thread {
-        
-        public Hilo(int x, int y, int x1, int y1){
-            posx = x;
-            posx1 = x1;
-            posy = y;
-            posy1 = y1;
-        }
-
-        public void run() {
-            
-        }
-    }
       
     public BarcoGUI(JPanel p, String nombreBarco){
         panel = p;
@@ -92,26 +75,24 @@ public class BarcoGUI extends javax.swing.JLabel{
    }
    
    public boolean MoverBarco(int posx1, int posy1){
+        int movX, movY;
         int posx = this.labelBarco.getX();
+        int posy = this.labelBarco.getY();
+        System.out.println("Label origen x: "+posx+" y:"+posy);
+        
         if(posx1 > posx){
             movX = 1;   // El punto al que queremos movernos esta a la derecha
-        }else
-        if(posx1 < posx){
+        }else if(posx1 < posx){
             movX = 2;   // El punto al que queremos movernos esta a la izquierda
-        }else 
-        if(posx1 == posx){
+        }else{
             movX = 3;   // El punto al que queremos movernos esta al mismo nivel del eje x
         }
-        
-        
-        int posy = this.labelBarco.getY();
+
         if(posy1 > posy){
             movY = 1;   // El punto al que queremos movernos esta hacia abajo
-        }else
-        if(posy1 < posy){
+        }else if(posy1 < posy){
             movY = 2;   // El punto al que queremos movernos esta hacia arriba
-        }else
-        if(posy1 == posy){
+        }else{
             movY = 3;   // El punto al que queremos movernos esta al mismo nivel del eje y
         }
 
@@ -138,8 +119,9 @@ public class BarcoGUI extends javax.swing.JLabel{
             if((labelBarco.getX() == posx1) && (labelBarco.getY() == posy1)){
                 sw = 1;
             }  
-            System.out.print("");
+            System.out.print("x: "+labelBarco.getX()+" y:"+labelBarco.getY());
         }
+        
         System.out.println("TERMINE DE MOVERME");
         return true;
     }

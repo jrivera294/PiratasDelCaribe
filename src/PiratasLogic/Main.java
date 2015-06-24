@@ -13,6 +13,8 @@ import java.net.*;
 import java.io.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -34,11 +36,12 @@ public class Main {
         BufferedReader buf = new BufferedReader(ent);
         String numPuerto, URLRegistro;
        
-        System.setProperty("java.rmi.server.hostname", "192.168.110.137");
+        System.setProperty("java.rmi.server.hostname", "192.168.1.125");
         
         try {
- 
-		File file = new File("src/configXML/maquina01.xml");
+                Mapa mapa;
+                
+		File file = new File("src/configXML/maquina02.xml");
 		JAXBContext jaxbContext = JAXBContext.newInstance(Maquina.class);
  
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -70,7 +73,12 @@ public class Main {
                         objeto.getSitio().get(i).setCalamidad(calamidad);
                     }
                     
-                    Mapa mapa = new Mapa(ruta);
+                    if(ruta == null){
+                        mapa = null;
+                    }else{
+                        mapa = new Mapa(ruta);
+                    }
+                    
 
                     Cofre cofre = new Cofre(mapa, oro,plata,perlas,monedas,joyas,piedras,corazon,capac);
                     
@@ -93,7 +101,7 @@ public class Main {
            System.out.println("Iniciando server RMI. Port:  "+numPuerto);
            arrancarRegistro(numPuerto);
            RemoteClass objetoRemoto = new RemoteClass(objeto,graphicInterface);
-           URLRegistro = "rmi://192.168.110.102:"+numPuerto+"/barco";
+           URLRegistro = "rmi://192.168.1.125:"+numPuerto+"/barco";
            
            Naming.rebind(URLRegistro,objetoRemoto);
            System.out.println("Servidor registrado. El registro contiene actualmente:");
@@ -110,6 +118,7 @@ public class Main {
 
         barco.setCofre(cBarco);
         barco.reabastecer();
+        //barco.llamadaRMI("192.168.1.125","2-Cueva del Bucanero",2);
     }
 
     private static void arrancarRegistro(String nroPuertoRMI) throws RemoteException{

@@ -32,7 +32,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
     @Override
     public boolean desembarcar(Barco barco, String nombreSitio, int idMaquina) throws RemoteException{
 
-        Hilo hilo = new Hilo(barco,nombreSitio,this.graphicInterface,this.maquina);
+        Hilo hilo = new Hilo(barco,nombreSitio,this.graphicInterface,this.maquina, idMaquina);
         hilo.start();
 
         System.out.println("Objeto remoto enviado exitosamente");
@@ -48,13 +48,15 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
         private PiratasGUI graphicInterface;
         private BarcoGUI barcoGUI;
         private Maquina maquina;
+        private int idOrigen;
 
-        public Hilo(Barco barco, String nombreSitio, PiratasGUI graphicInterface, Maquina maquina) {
+        public Hilo(Barco barco, String nombreSitio, PiratasGUI graphicInterface, Maquina maquina, int idOrigen) {
             this.barco = barco;
             this.nombreSitio = nombreSitio;
             this.graphicInterface = graphicInterface;
             this.panelPrincipal = graphicInterface.getPanelPrincipal();
             this.maquina = maquina;
+            this.idOrigen = idOrigen;
             barcoGUI = new BarcoGUI(panelPrincipal,barco.getNombre());
         }
 
@@ -64,23 +66,25 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
             dato = nombreSitio.split("-");
             Boolean flag = false; 
             int xOrigen, yOrigen, xSalida,ySalida;
-            String idOrigen;
             
             barco.setBarcoGUI(barcoGUI);
             barco.setGraphicInterface(graphicInterface);
             this.graphicInterface.setEstadoBarcos(barco.getNombre(), barco.getTripulacion(), barco.getMuniciones(), barco.getComida(), barco.getCofre().getCapacidadActual());
             
             //Obtener el id de la maquina de donde viene el barco
-            if(barco.getCofre().getMapa() == null){
+            /*if(barco.getCofre().getMapa() == null){
                 idOrigen = barco.getRutaOrigen().split("-")[0];
             }else{
                 idOrigen = barco.getCofre().getMapa().getRuta().get(barco.getCofre()
                         .getMapa().getSitioActual()-1).split("-")[0];
-            }
+            }*/
+            
+            
+            System.out.println("idOrigen: "+idOrigen);
             
             // Obtener el punto donde debe aparecer el barco
-            xOrigen = parseInt(maquina.getPuntoSalida(idOrigen).split("-")[1].split(",")[0]);
-            yOrigen = parseInt(maquina.getPuntoSalida(idOrigen).split("-")[1].split(",")[1]);
+            xOrigen = parseInt(maquina.getPuntoSalida(idOrigen+"").split("-")[1].split(",")[0]);
+            yOrigen = parseInt(maquina.getPuntoSalida(idOrigen+"").split("-")[1].split(",")[1]);
             
             barcoGUI.AparecerBarco(xOrigen, yOrigen);
             
@@ -119,6 +123,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                     //Mover el barco al punto de salida
                     xSalida = parseInt(maquina.getPuntoSalida(dato[0]).split("-")[1].split(",")[0]);
                     ySalida = parseInt(maquina.getPuntoSalida(dato[0]).split("-")[1].split(",")[1]);
+                    //System.out.println("Barco moviendose al punto de salida x:"+xSalida+" y:"+ySalida);
                     barcoGUI.MoverBarco(xSalida, ySalida);
                     
                     for (int i=0; i < maquina.getSitioRemoto().size(); i++){
@@ -127,24 +132,28 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                         if (dato[0].equals(ip[0]) == true){
                             if (barco.llamadaRMI(ip[1], dato[0]+"-"+dato[1], maquina.getId()) == false){
                                 System.out.println("Error LlamadaRMI: No se pudo enviar el Barco.");
+                                System.out.println("Buscando siguiente sitio");
+                                flag = true;
+                            }else{
+                                System.out.println("Barco enviado exitosamente");
+                                barcoGUI.OcultarBarco();
+                                return;
                             }
                             break;
                         }
                     }
-                    
-                    barcoGUI.OcultarBarco();
-                    return;
                 }
-                
-                // Mover al sitio de destino
-                for(Sitio sitio : maquina.getSitio()){
-                    if(sitio.getNombreSitio().equals(nombreSitio)){
-                        barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
-                        break;
+                if (flag == true){
+                    // Mover al sitio de destino
+                    for(Sitio sitio : maquina.getSitio()){
+                        if(sitio.getNombreSitio().equals(nombreSitio)){
+                            System.out.println("Barco moviendose a: "+sitio.getNombreSitio());
+                            barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
+                            break;
+                        }
                     }
-                }
 
-                //if (flag == true){
+                
                     for (int i=0; i < maquina.getSitio().size(); i++){
                         if (dato[1].equals(maquina.getSitio().get(i).getNombreSitio()) == true){
                             //Retorna true: Cuando se queda sin recursos.
@@ -169,7 +178,8 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             break;
                         }
                     }
-                //}
+                }
+                
                 barco.getCofre().getMapa().setSitioActual();
                 dato = barco.getCofre().getMapa().getRuta().get(barco.getCofre().getMapa().getSitioActual()).split("-");
                 try {

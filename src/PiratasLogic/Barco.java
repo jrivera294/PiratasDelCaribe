@@ -184,11 +184,18 @@ public class Barco implements java.io.Serializable{
         
         //Recoger mapa
         if(sitio.getCofre().getMapa() != null){
-            if(this.cofre.getMapa().getSitioActual() > sitio.getCofre().getMapa().getRuta().size()){
-                auxMapa = this.cofre.getMapa();
+            //Si el barco no tiene mapa recogelo, si tiene mapa intercambialo, si le conviene
+            if(this.cofre.getMapa()==null){
                 this.cofre.setMapa(sitio.getCofre().getMapa());
-                this.cofre.setMapa(auxMapa);
-                System.out.println("Barco: "+this.nombre+" intercambió Mapa");
+                sitio.getCofre().setMapa(null);
+                System.out.println("Barco: "+this.nombre+" recogió un mapa");
+            }else{
+                if(this.cofre.getMapa().getRuta().size()-this.cofre.getMapa().getSitioActual() > sitio.getCofre().getMapa().getRuta().size()){
+                    auxMapa = this.cofre.getMapa();
+                    this.cofre.setMapa(sitio.getCofre().getMapa());
+                    sitio.getCofre().setMapa(auxMapa);
+                    System.out.println("Barco: "+this.nombre+" intercambió Mapa");
+                }
             }
         }
         
