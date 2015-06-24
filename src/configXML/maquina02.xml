@@ -95,6 +95,7 @@
 		<posY>200</posY>
 		<cofre>
 			<mapa>
+                                <ruta>2-Cueva de los Marineros</ruta>
 				<ruta>1-Cayo del Buen Viento</ruta>
 				<ruta>4-Bahia del Tesoro Perdido</ruta>
 				<ruta>2-Bahia de la Esperanza</ruta>
@@ -142,6 +143,7 @@
 		<posY>10</posY>
 		<cofre>
 			<mapa>
+                                <ruta>2-Cueva del Bucanero</ruta>
 				<ruta>4-Puerto Rico</ruta>
 				<ruta>4-Cayo de los Pelicanos</ruta>
 				<ruta>3-Bahia de las Flores</ruta>
