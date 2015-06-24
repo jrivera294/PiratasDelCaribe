@@ -13,15 +13,15 @@ public class Maquina {
     private List<String> ipRemota;
     private List<String> puntoSalida;
     private List<String> sitioRemoto;
-    private Barco barco;
+    private List<Barco> barco;
     private List<Sitio> sitio;
 
-    public Barco getBarco() {
+    public List<Barco> getBarco() {
         return barco;
     }
     
     @XmlElement(name = "barco") 
-    public void setBarco(Barco barco) {
+    public void setBarco(List<Barco> barco) {
         this.barco = barco;
     }
     

@@ -82,41 +82,57 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
             
             System.out.println("idOrigen: "+idOrigen);
             
-            // Obtener el punto donde debe aparecer el barco
-            xOrigen = parseInt(maquina.getPuntoSalida(idOrigen+"").split("-")[1].split(",")[0]);
-            yOrigen = parseInt(maquina.getPuntoSalida(idOrigen+"").split("-")[1].split(",")[1]);
-            
-            barcoGUI.AparecerBarco(xOrigen, yOrigen);
-            
-            //Determinar si viene a la base
-            if (nombreSitio.equals(barco.getRutaOrigen()) == true){
+            if(idOrigen == maquina.getId()){
+                System.out.println("Barco aparece en el sitio de origen.");
                 for(Sitio sitio : maquina.getSitio()){
-                    if(sitio.getNombreSitio().equals(nombreSitio)){
-                        barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
+                    if(sitio.getNombreSitio().equals(barco.getRutaOrigen().split("-")[1])){
+                        xOrigen = sitio.getPosX();
+                        yOrigen = sitio.getPosY();
+                        barcoGUI.AparecerBarco(xOrigen, yOrigen);
+                        
+                        //Preguntar por sitio inicial
+                        //dato = el valor que me pase la ventana, luego de hacerle split("-")
+                        dato = "2-Cueva del Bucanero".split("-");
                         break;
                     }
                 }
-                //Esperar que el barco termine de moverse
+            }else{
+                System.out.println("Barco aparece en un punto de entrada");
+                // Obtener el punto donde debe aparecer el barco
+                xOrigen = parseInt(maquina.getPuntoSalida(idOrigen+"").split("-")[1].split(",")[0]);
+                yOrigen = parseInt(maquina.getPuntoSalida(idOrigen+"").split("-")[1].split(",")[1]);
 
-                if (barco.getCofre().getCorazonPrincesa() != 0){
-                    
-                    System.out.println("GANASTE: Finalizo el juego.");
-                    
-                    //avisar a las demas maquinas que se termino el juego
-                    return;
-                }else{
-                    barco.reabastecer();
-                    this.graphicInterface.setEstadoBarcos(barco.getNombre(), barco.getTripulacion(), barco.getMuniciones(), barco.getComida(), barco.getCofre().getCapacidadActual());
-                    try {
-                        System.out.println("Barco: Reabasteciendo.");
-                        Thread.sleep(5000); 
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
+                barcoGUI.AparecerBarco(xOrigen, yOrigen);
+
+                //Determinar si viene a la base
+                if (nombreSitio.equals(barco.getRutaOrigen()) == true){
+                    for(Sitio sitio : maquina.getSitio()){
+                        if(sitio.getNombreSitio().equals(nombreSitio)){
+                            barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
+                            break;
+                        }
                     }
-                    dato = barco.getCofre().getMapa().getRuta().get(barco.getCofre().getMapa().getSitioActual()).split("-");
-                }   
+                    //Esperar que el barco termine de moverse
+
+                    if (barco.getCofre().getCorazonPrincesa() != 0){
+
+                        System.out.println("GANASTE: Finalizo el juego.");
+
+                        //avisar a las demas maquinas que se termino el juego
+                        return;
+                    }else{
+                        barco.reabastecer();
+                        this.graphicInterface.setEstadoBarcos(barco.getNombre(), barco.getTripulacion(), barco.getMuniciones(), barco.getComida(), barco.getCofre().getCapacidadActual());
+                        try {
+                            System.out.println("Barco: Reabasteciendo.");
+                            Thread.sleep(5000); 
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        dato = barco.getCofre().getMapa().getRuta().get(barco.getCofre().getMapa().getSitioActual()).split("-");
+                    }   
+                }
             }
-                
             while(true){
                 //Si son diferentes es Remoto, sino es Local
                 if (parseInt(dato[0]) != maquina.getId()){
@@ -124,7 +140,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                     xSalida = parseInt(maquina.getPuntoSalida(dato[0]).split("-")[1].split(",")[0]);
                     ySalida = parseInt(maquina.getPuntoSalida(dato[0]).split("-")[1].split(",")[1]);
                     //System.out.println("Barco moviendose al punto de salida x:"+xSalida+" y:"+ySalida);
-                    barcoGUI.MoverBarco(xSalida, ySalida);
+                    //barcoGUI.MoverBarco(xSalida, ySalida);
                     
                     for (int i=0; i < maquina.getSitioRemoto().size(); i++){
                         String ip[];
@@ -143,12 +159,12 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                         }
                     }
                 }
-                if (flag == true){
+                if (flag == false){
                     // Mover al sitio de destino
                     for(Sitio sitio : maquina.getSitio()){
-                        if(sitio.getNombreSitio().equals(nombreSitio)){
+                        if(sitio.getNombreSitio().equals(dato[1])){
                             System.out.println("Barco moviendose a: "+sitio.getNombreSitio());
-                            barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
+                            //barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
                             break;
                         }
                     }

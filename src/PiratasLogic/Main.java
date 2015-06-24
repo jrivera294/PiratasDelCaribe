@@ -25,7 +25,6 @@ public class Main {
 
     public static void main(String[] args) {
         int i, cofres;
-        Barco barco;
         Maquina objeto = null;
         List<String> ruta;
         String nCalamidad;
@@ -112,13 +111,23 @@ public class Main {
        } catch (MalformedURLException excr) {
            System.out.println("Excepción en el servidor.main:"+excr);
        }
-       
-        barco = objeto.getBarco();
-        Cofre cBarco = new Cofre(objeto.getBarco().getCofre().getCapacidad());
-
+        
+        /*
+        // Iniciar los barcos encontrados en el xml
+        for(Barco barco : objeto.getBarco()){
+            Cofre cBarco = new Cofre(barco.getCofre().getCapacidad());
+            barco.setCofre(cBarco);
+            barco.reabastecer();
+            barco.llamadaRMI("192.168.1.125","",2);
+        }*/
+        
+        Barco barco = objeto.getBarco().get(0);
+        Cofre cBarco = new Cofre(barco.getCofre().getCapacidad());
         barco.setCofre(cBarco);
         barco.reabastecer();
-        //barco.llamadaRMI("192.168.1.125","2-Cueva del Bucanero",2);
+        barco.llamadaRMI("192.168.1.125","",2);
+       
+
     }
 
     private static void arrancarRegistro(String nroPuertoRMI) throws RemoteException{

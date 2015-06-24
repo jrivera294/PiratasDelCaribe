@@ -25,8 +25,8 @@ public class Barco implements java.io.Serializable{
     private int maxTripulacion;
     private int maxComida;
     private int maxMuniciones;
-    private BarcoGUI barcoGUI;
-    private PiratasGUI graphicInterface;
+    private transient BarcoGUI barcoGUI;
+    private transient PiratasGUI graphicInterface;
 
     public void reabastecer(){
         this.setTripulacion(this.getMaxTripulacion());
