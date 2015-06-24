@@ -89,7 +89,7 @@ public class Main {
 	  }
         
         // Interfaz gráfica
-        PiratasGUI graphicInterface = new PiratasGUI();
+        PiratasGUI graphicInterface = new PiratasGUI(objeto);
         graphicInterface.setVisible(true);
         
         // RMI Server

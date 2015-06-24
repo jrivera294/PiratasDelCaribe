@@ -5,6 +5,7 @@
  */
 package PiratasGUI;
 
+import PiratasLogic.Maquina;
 import java.awt.Color;
 import java.io.File;
 import java.util.logging.Level;
@@ -22,31 +23,35 @@ public class PiratasGUI extends javax.swing.JFrame {
 //    private Barco labelBarco;
     private Barco BarcoMovement;
     private JPanel PanelPrincipal;
+    private Maquina maquina;
 
 //    private JLabel labelBarco;
-    public PiratasGUI() {
+    public PiratasGUI(Maquina maquina) {
         initComponents();
         /*Ventana*/
         String filePath = new File("").getAbsolutePath();
         System.out.println(filePath + "\\src\\images\\maquina2.png");
 
         /*Segun la maquina hay que cambiar el fondo*/
-        PanelPrincipal = new FondoPanel("/images/maquina2.png");
+        
+        if (maquina.getId() == 1){
+            PanelPrincipal = new FondoPanel("/images/maquina1.png");
+        }else if (maquina.getId() == 2){
+            PanelPrincipal = new FondoPanel("/images/maquina2.png");
+        }else if (maquina.getId() == 3){
+            PanelPrincipal = new FondoPanel("/images/maquina3.png");
+        }else if (maquina.getId() == 4){
+            PanelPrincipal = new FondoPanel("/images/maquina4.png");
+        }
+        
         PanelPrincipal.setBounds(170, 0, 1196, 768);
         
         add(PanelPrincipal);
         
         PanelPrincipal.setVisible(true);
-       // PanelPrincipal.setIcon(new ImageIcon(filePath + "\\src\\images\\playa.png"));
 
         this.setBounds(0, 0, 1366, 768);
-        
-//        labelBarco = new JLabel();
-//        labelBarco.setIcon(new ImageIcon("C:\\Users\\Toshiba PC\\Documents\\NetBeansProjects\\PiratasUCAB\\src\\images\\barcoPirata.png"));
-//        add(labelBarco);
-//        labelBarco.setLocation(10,10);
-//        labelBarco.setVisible(true);
-     
+             
         BarcoMovement = new Barco(PanelPrincipal, "Venganza Errante");
     }
     
@@ -646,7 +651,7 @@ public class PiratasGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PiratasGUI().setVisible(true);
+                
             }
         });
     }
