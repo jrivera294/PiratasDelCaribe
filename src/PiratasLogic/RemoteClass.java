@@ -92,7 +92,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                         
                         //Preguntar por sitio inicial
                         //dato = el valor que me pase la ventana, luego de hacerle split("-")
-                        dato = "2-Cueva del Bucanero".split("-");
+                        dato = "2-Cueva de los Marineros".split("-");
                         break;
                     }
                 }
@@ -108,7 +108,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                 if (nombreSitio.equals(barco.getRutaOrigen()) == true){
                     for(Sitio sitio : maquina.getSitio()){
                         if(sitio.getNombreSitio().equals(nombreSitio)){
-                            barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
+                            //barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
                             break;
                         }
                     }

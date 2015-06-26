@@ -39,13 +39,13 @@ public class BarcoGUI extends javax.swing.JLabel{
                 tormenta = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "barcoPtormenta.png");
                 
                 break;
-            case "Interceptor": 
+            case "Invencible": 
                 imageBarco = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "interceptorBarco.png");
                 kraken =  new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "intercepkraken.png");
                 tornado = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "interceptornado.png");
                 tormenta = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "interceptormenta.png");
                 break;
-            case "Invencible": 
+            case "Interceptor": 
                 imageBarco = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "invenBarco.png");
                 kraken =  new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "invenkraken.png");
                 tornado = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "inventornado.png");
