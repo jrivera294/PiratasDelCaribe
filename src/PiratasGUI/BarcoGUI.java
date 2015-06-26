@@ -7,6 +7,8 @@ package PiratasGUI;
 
 import AppPackage.AnimationClass;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -67,6 +69,7 @@ public class BarcoGUI extends javax.swing.JLabel{
        panel.add(labelBarco);
        labelBarco.setBounds(x, y, 150, 136);
        labelBarco.setVisible(true);
+       System.out.println("Aparecer X: "+x+" Y: "+y);
    }
    
    public void OcultarBarco(){
@@ -75,11 +78,11 @@ public class BarcoGUI extends javax.swing.JLabel{
    }
    
    public boolean MoverBarco(int posx1, int posy1){
-        int movX, movY;
-        int posx = this.labelBarco.getX();
-        int posy = this.labelBarco.getY();
-        System.out.println("Label origen x: "+posx+" y:"+posy);
-        
+//        int movX, movY;
+//        int posx = this.labelBarco.getX();
+//        int posy = this.labelBarco.getY();
+        //System.out.println("Label origen x: "+posx+" y:"+posy);
+        /*
         if(posx1 > posx){
             movX = 1;   // El punto al que queremos movernos esta a la derecha
         }else if(posx1 < posx){
@@ -100,28 +103,72 @@ public class BarcoGUI extends javax.swing.JLabel{
 
         // MOVIMIENTO EN EL EJE X
         if(movX == 1){
-            barcoAnimated.jLabelXRight(posx, posx1, 100, 20, labelBarco);   // Se mueve hacia la derecha
+            barcoAnimated.jLabelXRight(posx, posx1, 6, 1, labelBarco);   // Se mueve hacia la derecha
         }else
         if(movX == 2){
-            barcoAnimated.jLabelXLeft(posx, posx1, 100, 20, labelBarco);    // Se mueve hacia la izquierda
+            barcoAnimated.jLabelXLeft(posx, posx1, 6, 1, labelBarco);    // Se mueve hacia la izquierda
         }    
 
         // MOVIMIENTO EN EL EJE Y
         if(movY == 1){
-            barcoAnimated.jLabelYDown(posy, posy1, 100, 20, labelBarco);    // Se mueve hacia la abajo
+            barcoAnimated.jLabelYDown(posy, posy1, 6, 1, labelBarco);    // Se mueve hacia la abajo
         }else
         if(movY == 2){
-            barcoAnimated.jLabelYUp(posy, posy1, 100, 20, labelBarco);      // Se mueve hacia la arriba
+            barcoAnimated.jLabelYUp(posy, posy1, 6, 1, labelBarco);      // Se mueve hacia la arriba
         }
         
         int sw=0;
         while (sw == 0){
             if((labelBarco.getX() == posx1) && (labelBarco.getY() == posy1)){
                 sw = 1;
-            }  
-            System.out.print("x: "+labelBarco.getX()+" y:"+labelBarco.getY());
+            } 
+            //System.out.print("");
+            //System.out.print("x: "+labelBarco.getX()+" y:"+labelBarco.getY());
+        }*/
+        
+        int x1,y1,absX,absY,dirX=0,dirY=0;
+
+        x1 = labelBarco.getX()-posx1;
+        y1 = labelBarco.getY()-posy1;
+        
+        System.out.println("Desde X: "+labelBarco.getX()+" Y: "+labelBarco.getY());
+        System.out.println("Hasta X: "+posx1+" Y: "+posy1);
+        
+        absX = Math.abs(x1);
+        absY = Math.abs(y1);
+        
+        if(x1!=0){
+            dirX = (x1/absX)*-1;
+        }
+        if(y1!=0){
+            dirY = (y1/absY)*-1;
+        }
+
+        
+        //System.out.println("X: "+dirX+" Y: "+dirY);
+        
+        System.out.println("EMPECE A MOVERME");
+        
+        while(absX!=0 || absY!=0){
+            if(absX!=0){
+                absX--;
+            }else{
+                dirX = 0;
+            }
+            if(absY!=0){
+                absY--;
+            }else{
+                dirY = 0;
+            }
+            labelBarco.setLocation(labelBarco.getX()+dirX, labelBarco.getY()+dirY);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(BarcoGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
+
         System.out.println("TERMINE DE MOVERME");
         return true;
     }
