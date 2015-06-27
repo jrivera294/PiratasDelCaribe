@@ -66,10 +66,12 @@ public class BarcoGUI extends javax.swing.JLabel{
     * @param y Posicion en el eje Y de la pantalla donde el Barco iniciara el movimiento
     */
    public void AparecerBarco(int x, int y){
+       panel.setLayout(null);
        panel.add(labelBarco);
        labelBarco.setBounds(x, y, 150, 136);
        labelBarco.setVisible(true);
        System.out.println("Aparecer X: "+x+" Y: "+y);
+
    }
    
    public void OcultarBarco(){
@@ -77,7 +79,7 @@ public class BarcoGUI extends javax.swing.JLabel{
        panel.remove(labelBarco);
    }
    
-   public boolean MoverBarco(int posx1, int posy1){
+   public void MoverBarco(int posx1, int posy1){
 //        int movX, movY;
 //        int posx = this.labelBarco.getX();
 //        int posy = this.labelBarco.getY();
@@ -170,7 +172,6 @@ public class BarcoGUI extends javax.swing.JLabel{
         
 
         System.out.println("TERMINE DE MOVERME");
-        return true;
     }
         
     public void setCalamidadBarco(String calamidad){

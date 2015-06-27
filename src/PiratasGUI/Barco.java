@@ -46,15 +46,15 @@ public class Barco extends javax.swing.JLabel{
 
         public void run() {
             ship.AparecerBarco(posx, posy);
-            if(ship.MoverBarco(posx1, posy1)){
-                System.out.println("Termino 1er mov");
-            }
-            if(ship.MoverBarco(60, 200)){
-                System.out.println("Termino 2do mov");
-            }
-            if(ship.MoverBarco(300, 200)){
-                System.out.println("Termino 3er mov");
-            }
+//            if(ship.MoverBarco(posx1, posy1)){
+//                System.out.println("Termino 1er mov");
+//            }
+//            if(ship.MoverBarco(60, 200)){
+//                System.out.println("Termino 2do mov");
+//            }
+//            if(ship.MoverBarco(300, 200)){
+//                System.out.println("Termino 3er mov");
+//            }
             ship.setCalamidadBarco("Tornado");
         //    ship.OcultarBarco();
         }
