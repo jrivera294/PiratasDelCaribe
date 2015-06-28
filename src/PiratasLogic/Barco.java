@@ -103,14 +103,16 @@ public class Barco implements java.io.Serializable{
             //Si la tripulacion en alguno de los barcos es < 1/3
             if (this.getTripulacion() < (1/3)){
                 tesoro = (this.getCofre().getCapacidadActual())/2;
-                sitio.getCofre().setCapacidad(sitio.getCofre().getCapacidadActual()+tesoro);
+                
+                Cofre.liberarEspacio(tesoro, this.getCofre(), sitio.getCofre());
                 
                 //Va a su puerto de Origen a reabastecer
                 this.irASitio(this.getRutaOrigen());
                 
             }else if (barcoOponente.getTripulacion() < (1/3)){
                 tesoro = (barcoOponente.getCofre().getCapacidadActual())/2;
-                sitio.getCofre().setCapacidad(sitio.getCofre().getCapacidadActual()+tesoro);
+                
+                Cofre.liberarEspacio(tesoro, barcoOponente.getCofre(), sitio.getCofre());
                 
                 //Va a su puerto de Origen a reabastecer
                 barcoOponente.irASitio(barcoOponente.getRutaOrigen());
