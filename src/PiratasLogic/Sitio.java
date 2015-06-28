@@ -1,5 +1,6 @@
 package PiratasLogic;
 
+import java.util.List;
 import javax.xml.bind.annotation.*;
 /**
  *
@@ -7,7 +8,7 @@ import javax.xml.bind.annotation.*;
  */
 
 public class Sitio {
-    
+    private List<Barco> barcoLocal;
     private String isla;
     private String nombreSitio;
     private Cofre cofre;
@@ -39,6 +40,14 @@ public class Sitio {
         this.costoComida = costoComida;
     }
 
+    public List<Barco> getBarcoLocal() {
+        return barcoLocal;
+    }
+
+    public void setBarcoLocal(List<Barco> barcoLocal) {
+        this.barcoLocal = barcoLocal;
+    }
+    
     public int getPosX() {
         return posX;
     }

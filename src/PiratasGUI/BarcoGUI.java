@@ -66,10 +66,16 @@ public class BarcoGUI extends javax.swing.JLabel{
     * @param y Posicion en el eje Y de la pantalla donde el Barco iniciara el movimiento
     */
    public void AparecerBarco(int x, int y){
-       panel.add(labelBarco);
-       labelBarco.setBounds(x, y, 150, 136);
-       labelBarco.setVisible(true);
-       System.out.println("Aparecer X: "+x+" Y: "+y);
+       try {
+            panel.add(labelBarco);
+            labelBarco.setBounds(x, y, 150, 136);
+            labelBarco.setVisible(true);
+
+            System.out.println("Aparecer X: "+x+" Y: "+y);
+            Thread.sleep(10000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(BarcoGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }       
    }
    
    public void OcultarBarco(){

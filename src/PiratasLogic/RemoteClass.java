@@ -88,6 +88,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                     if(sitio.getNombreSitio().equals(barco.getRutaOrigen().split("-")[1])){
                         xOrigen = sitio.getPosX();
                         yOrigen = sitio.getPosY();
+                        System.out.println("xOrigen: "+xOrigen+ " yOrigen: "+yOrigen);
                         barcoGUI.AparecerBarco(xOrigen, yOrigen);
                         
                         //Preguntar por sitio inicial
