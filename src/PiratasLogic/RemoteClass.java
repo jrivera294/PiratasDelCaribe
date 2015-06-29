@@ -7,6 +7,7 @@ package PiratasLogic;
 
 import PiratasGUI.BarcoGUI;
 import PiratasGUI.PiratasGUI;
+import PiratasGUI.VentanaRutas;
 import static java.lang.Integer.parseInt;
 import java.rmi.*;
 import java.rmi.server.*;
@@ -93,7 +94,12 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                         
                         //Preguntar por sitio inicial
                         //dato = el valor que me pase la ventana, luego de hacerle split("-")
-                        dato = "2-Cueva de los Marineros".split("-");
+                        VentanaRutas ventana = new VentanaRutas(null,true,maquina.getSitioRemoto());
+                        ventana.setVisible(true);
+                        
+                        ventana.addWindowListener(null);
+                        System.out.println("Ruta: "+ventana.getjComboBoxDestino().getSelectedItem().toString());
+                        dato = ventana.getjComboBoxDestino().getSelectedItem().toString().split("-");
                         break;
                     }
                 }
@@ -198,13 +204,19 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            barco.getCofre().getMapa().setSitioActual();
+                            
                             try{
+                                barco.getCofre().getMapa().setSitioActual();
                                 dato = barco.getCofre().getMapa().getRuta().get(barco.getCofre()
                                         .getMapa().getSitioActual()).split("-");
                             }catch(Exception e){
                                 //dato = barco.getRutaOrigen().split("-");
-                                System.out.println("Esperando por ventana de marianny");
+                                //System.out.println("Esperando por ventana de marianny");
+                                VentanaRutas ventana = new VentanaRutas(null,true,maquina.getSitioRemoto());
+                                ventana.setVisible(true);
+                                System.out.println("Ruta: "+ventana.getjComboBoxDestino().getSelectedItem().toString());
+                                dato = ventana.getjComboBoxDestino().getSelectedItem().toString().split("-");
+                                //System.out.println("Ruta seleccionada: "+graphicInterface.getDestino());
                             }
                         }   
                     }else{
@@ -232,8 +244,8 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                                 break;
                             }
                         }
-                        barco.getCofre().getMapa().setSitioActual();
                         try{
+                            barco.getCofre().getMapa().setSitioActual();
                             dato = barco.getCofre().getMapa().getRuta().get(barco.getCofre()
                                     .getMapa().getSitioActual()).split("-");
                         }catch(Exception e){
@@ -247,7 +259,6 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                 } catch (InterruptedException ex) {
                     Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
             }
         }         
     }

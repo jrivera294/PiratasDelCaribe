@@ -51,7 +51,6 @@ public class VentanaRutas extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Segoe UI Symbol", 0, 18)); // NOI18N
         jLabel1.setText("Seleccionar Destino");
 
-        jComboBoxDestino.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxDestino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxDestinoActionPerformed(evt);
@@ -102,13 +101,13 @@ public class VentanaRutas extends javax.swing.JDialog {
 
     private void jComboBoxDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDestinoActionPerformed
         // TODO add your handling code here:
-        p.setDestino(this.jComboBoxDestino.getSelectedItem().toString());
-
+        //p.setDestino(this.jComboBoxDestino.getSelectedItem().toString());
+        //this.dispose();
     }//GEN-LAST:event_jComboBoxDestinoActionPerformed
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
-        p.setDestino(this.jComboBoxDestino.getSelectedItem().toString());
+        //p.setDestino(this.jComboBoxDestino.getSelectedItem().toString());
         this.dispose();
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
