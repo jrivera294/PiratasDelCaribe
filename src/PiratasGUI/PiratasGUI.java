@@ -48,19 +48,19 @@ public class PiratasGUI extends javax.swing.JFrame {
         /*Ventana*/
         String filePath = new File("").getAbsolutePath();
         System.out.println(filePath + "\\src\\images\\maquina2.png");
-         rutas = new VentanaRutas(this, false);
+        //rutas = new VentanaRutas(this, false);
          
         /*Segun la maquina hay que cambiar el fondo*/
         /*Segun la maquina. Si es 1, es el pirata, si es 2, son los dos barcos reales*/
          
         if (maquina.getId() == 1){
             PanelPrincipal = new FondoPanel("/images/maquina1.png");
-            rutas.getjLabelBarco().setText("Venganza Errante");
-            rutas.getjComboBoxDestino2().setVisible(false);
+//            rutas.getjLabelBarco().setText("Venganza Errante");
+//            rutas.getjComboBoxDestino2().setVisible(false);
         }else if (maquina.getId() == 2){
             PanelPrincipal = new FondoPanel("/images/maquina2.png");
-            rutas.getjLabelBarco().setText("El Interceptor");
-            rutas.getjLabelBarco2().setText("El Invencible");
+//            rutas.getjLabelBarco().setText("El Interceptor");
+//            rutas.getjLabelBarco2().setText("El Invencible");
         }else if (maquina.getId() == 3){
             PanelPrincipal = new FondoPanel("/images/maquina3.png");
         }else if (maquina.getId() == 4){

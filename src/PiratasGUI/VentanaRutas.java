@@ -5,6 +5,7 @@
  */
 package PiratasGUI;
 
+import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,12 +18,18 @@ public class VentanaRutas extends javax.swing.JDialog {
     PiratasGUI p;
     /**
      * Creates new form VentanaRutas
+     * @param parent
+     * @param modal
+     * @param listaSitios
      */
-    public VentanaRutas(PiratasGUI parent, boolean modal) {
+    public VentanaRutas(PiratasGUI parent, boolean modal, List<String> listaSitios) {
         super(parent, modal);
         initComponents();
         p = parent;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        for(String sitio : listaSitios){
+            jComboBoxDestino.addItem(sitio);
+        }
         
         /*Segun la maquina, setear los labels con los nombres de los barcos y la visibilidad de los combobox*/
     }
@@ -36,10 +43,7 @@ public class VentanaRutas extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabelBarco = new javax.swing.JLabel();
-        jLabelBarco2 = new javax.swing.JLabel();
         jComboBoxDestino = new javax.swing.JComboBox();
-        jComboBoxDestino2 = new javax.swing.JComboBox();
         jButtonAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -47,21 +51,10 @@ public class VentanaRutas extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Segoe UI Symbol", 0, 18)); // NOI18N
         jLabel1.setText("Seleccionar Destino");
 
-        jLabelBarco.setText("jLabel2");
-
-        jLabelBarco2.setText("jLabel3");
-
         jComboBoxDestino.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxDestino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxDestinoActionPerformed(evt);
-            }
-        });
-
-        jComboBoxDestino2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxDestino2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxDestino2ActionPerformed(evt);
             }
         });
 
@@ -77,73 +70,41 @@ public class VentanaRutas extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(127, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(119, 119, 119))
+                .addGap(147, 147, 147)
+                .addComponent(jButtonAceptar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonAceptar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelBarco)
-                            .addComponent(jLabelBarco2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jComboBoxDestino, 0, 145, Short.MAX_VALUE)
-                            .addComponent(jComboBoxDestino2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(44, 44, 44))
+                .addContainerGap(127, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(119, 119, 119))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBoxDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelBarco))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxDestino2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelBarco2))
-                .addGap(18, 18, 18)
                 .addComponent(jButtonAceptar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public JLabel getjLabelBarco() {
-        return jLabelBarco;
-    }
-
+  
     public JComboBox getjComboBoxDestino() {
         return jComboBoxDestino;
     }
-
-    public JComboBox getjComboBoxDestino2() {
-        return jComboBoxDestino2;
-    }
-
-    public JLabel getjLabelBarco2() {
-        return jLabelBarco2;
-    }
-
 
     private void jComboBoxDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDestinoActionPerformed
         // TODO add your handling code here:
         p.setDestino(this.jComboBoxDestino.getSelectedItem().toString());
 
     }//GEN-LAST:event_jComboBoxDestinoActionPerformed
-
-    private void jComboBoxDestino2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDestino2ActionPerformed
-        // TODO add your handling code here:
-        p.setDestino2(this.jComboBoxDestino2.getSelectedItem().toString());
-    }//GEN-LAST:event_jComboBoxDestino2ActionPerformed
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
@@ -155,9 +116,6 @@ public class VentanaRutas extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JComboBox jComboBoxDestino;
-    private javax.swing.JComboBox jComboBoxDestino2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabelBarco;
-    private javax.swing.JLabel jLabelBarco2;
     // End of variables declaration//GEN-END:variables
 }
