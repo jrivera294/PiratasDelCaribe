@@ -99,21 +99,20 @@
 		<posY>200</posY>
 		<cofre>
 			<mapa>
-                                <!--<ruta>2-Cueva de los Marineros</ruta>
+                                <ruta>2-Cueva de los Marineros</ruta>
 				<ruta>1-Cayo del Buen Viento</ruta>
 				<ruta>4-Bahia del Tesoro Perdido</ruta>
 				<ruta>2-Bahia de la Esperanza</ruta>
 				<ruta>3-Cueva de los Huesos</ruta>	
 				<ruta>4-Cayo de los Pelicanos</ruta>
-				<ruta>1-Puerto Real</ruta>-->
-                                <!--
-                                <ruta>2-Cueva de los Marineros</ruta>
+				<ruta>1-Puerto Real</ruta>
+                                <!--<ruta>2-Cueva de los Marineros</ruta>
                                 <ruta>1-Cayo del Buen Viento</ruta>
                                 <ruta>1-Puerto Real</ruta>
                                 <ruta>2-Bahia de la Esperanza</ruta>-->
-                                <ruta>2-Cueva de los Marineros</ruta>
+                                <!--<ruta>2-Cueva de los Marineros</ruta>
                                 <ruta>2-Bahia de la Esperanza</ruta>
-                                <ruta>2-Bahia del Buen Reposo</ruta>
+                                <ruta>2-Bahia del Buen Reposo</ruta>-->
 			</mapa>
 			<capacidad>1000</capacidad>
 			<oro>3</oro>
