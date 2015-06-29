@@ -105,6 +105,8 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
 
                 barcoGUI.AparecerBarco(xOrigen, yOrigen);
 
+                
+                /*
                 //Determinar si viene a la base
                 if (nombreSitio.equals(barco.getRutaOrigen()) == true){
                     for(Sitio sitio : maquina.getSitio()){
@@ -132,7 +134,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                         }
                         dato = barco.getCofre().getMapa().getRuta().get(barco.getCofre().getMapa().getSitioActual()).split("-");
                     }   
-                }
+                }*/
             }
             while(true){
                 //Si son diferentes es Remoto, sino es Local
@@ -169,36 +171,77 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             break;
                         }
                     }
-
-                
-                    for (int i=0; i < maquina.getSitio().size(); i++){
-                        if (dato[1].equals(maquina.getSitio().get(i).getNombreSitio()) == true){
-                            //Retorna true: Cuando se queda sin recursos.
-                            if (barco.descontarRecursos(maquina.getSitio().get(i)) == true){
-                                //Hacer llamada RMI al punto de origen de barco.
-                                for(String ipRemota: maquina.getIpRemota()){
-                                    if(barco.getRutaOrigen().split("-")[0].equals(ipRemota.split("-")[0])){
-                                        this.barco.llamadaRMI(ipRemota.split("-")[1], nombreSitio, parseInt(ipRemota.split("-")[0]));
-                                    }
-                                }
-                                return;
-                            //Recoger: True si encontro el corazon de la princesa    
-                            }else if (barco.recoger(maquina.getSitio().get(i)) == true){
-                                //Hacer llamada RMI al punto de origen de barco.
-                                for(String ipRemota: maquina.getIpRemota()){
-                                    if(barco.getRutaOrigen().split("-")[0].equals(ipRemota.split("-")[0])){
-                                        this.barco.llamadaRMI(ipRemota.split("-")[1], nombreSitio, parseInt(ipRemota.split("-")[0]));
-                                    }
-                                }
-                                return;
+                    
+                    //Determinar si se dirige al origen
+                    if (dato[1].equals(barco.getRutaOrigen().split("-")[1]) == true){
+                        System.out.println("Voy al origen");
+                        for(Sitio sitio : maquina.getSitio()){
+                            if(sitio.getNombreSitio().equals(nombreSitio)){
+                                barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
+                                break;
                             }
-                            break;
                         }
+                        //Esperar que el barco termine de moverse
+
+                        if (barco.getCofre().getCorazonPrincesa() != 0){
+
+                            System.out.println("GANASTE: Finalizo el juego.");
+
+                            //avisar a las demas maquinas que se termino el juego
+                            return;
+                        }else{
+                            barco.reabastecer();
+                            this.graphicInterface.setEstadoBarcos(barco.getNombre(), barco.getTripulacion(), barco.getMuniciones(), barco.getComida(), barco.getCofre().getCapacidadActual());
+                            try {
+                                System.out.println("Barco: Reabasteciendo.");
+                                Thread.sleep(5000); 
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            barco.getCofre().getMapa().setSitioActual();
+                            try{
+                                dato = barco.getCofre().getMapa().getRuta().get(barco.getCofre()
+                                        .getMapa().getSitioActual()).split("-");
+                            }catch(Exception e){
+                                //dato = barco.getRutaOrigen().split("-");
+                                System.out.println("Esperando por ventana de marianny");
+                            }
+                        }   
+                    }else{
+                        for (int i=0; i < maquina.getSitio().size(); i++){
+                            if (dato[1].equals(maquina.getSitio().get(i).getNombreSitio()) == true){
+                                //Retorna true: Cuando se queda sin recursos.
+                                if (barco.descontarRecursos(maquina.getSitio().get(i)) == true){
+                                    //Hacer llamada RMI al punto de origen de barco.
+                                    for(String ipRemota: maquina.getIpRemota()){
+                                        if(barco.getRutaOrigen().split("-")[0].equals(ipRemota.split("-")[0])){
+                                            this.barco.llamadaRMI(ipRemota.split("-")[1], nombreSitio, parseInt(ipRemota.split("-")[0]));
+                                        }
+                                    }
+                                    return;
+                                //Recoger: True si encontro el corazon de la princesa    
+                                }else if (barco.recoger(maquina.getSitio().get(i)) == true){
+                                    //Hacer llamada RMI al punto de origen de barco.
+                                    for(String ipRemota: maquina.getIpRemota()){
+                                        if(barco.getRutaOrigen().split("-")[0].equals(ipRemota.split("-")[0])){
+                                            this.barco.llamadaRMI(ipRemota.split("-")[1], nombreSitio, parseInt(ipRemota.split("-")[0]));
+                                        }
+                                    }
+                                    return;
+                                }
+                                break;
+                            }
+                        }
+                        barco.getCofre().getMapa().setSitioActual();
+                        try{
+                            dato = barco.getCofre().getMapa().getRuta().get(barco.getCofre()
+                                    .getMapa().getSitioActual()).split("-");
+                        }catch(Exception e){
+                            dato = barco.getRutaOrigen().split("-");
+                        }
+                        System.out.println("Ruta: "+dato[1]);
                     }
                 }
-                
-                barco.getCofre().getMapa().setSitioActual();
-                dato = barco.getCofre().getMapa().getRuta().get(barco.getCofre().getMapa().getSitioActual()).split("-");
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException ex) {

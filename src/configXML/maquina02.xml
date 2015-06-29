@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <maquina id="2">
-	<ip>192.168.0.108</ip>
-        <ipRemota>1-192.168.110.102</ipRemota>
-        <ipRemota>192.168.0.108</ipRemota>
-        <ipRemota>3-192.168.110.103</ipRemota>
-        <ipRemota>4-192.168.110.104</ipRemota>
+	<ip>192.168.110.119</ip>
+        <ipRemota>1-192.168.110.127</ipRemota>
+        <ipRemota>2-192.168.110.119</ipRemota>
+        <ipRemota>3-192.168.110.121</ipRemota>
+        <ipRemota>4-192.168.110.128</ipRemota>
 	<salida>1-0,384</salida>
 	<salida>3-0,768</salida>
 	<salida>4-598,768</salida>
@@ -114,9 +114,6 @@
                                 <ruta>2-Cueva de los Marineros</ruta>
                                 <ruta>2-Bahia de la Esperanza</ruta>
                                 <ruta>2-Bahia del Buen Reposo</ruta>
-                                <ruta>2-Cueva de los Marineros</ruta>
-                                <ruta>2-Bahia de la Esperanza</ruta>
-                                <ruta>2-Cueva del Bucanero</ruta>
 			</mapa>
 			<capacidad>1000</capacidad>
 			<oro>3</oro>
