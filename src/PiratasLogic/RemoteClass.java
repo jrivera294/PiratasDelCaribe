@@ -67,6 +67,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
             dato = nombreSitio.split("-");
             Boolean flag = false; 
             int xOrigen, yOrigen, xSalida,ySalida;
+            boolean volverOrigen = false;
             
             barco.setBarcoGUI(barcoGUI);
             barco.setGraphicInterface(graphicInterface);
@@ -236,32 +237,37 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                                     //Hacer llamada RMI al punto de origen de barco.
                                     for(String ipRemota: maquina.getIpRemota()){
                                         if(barco.getRutaOrigen().split("-")[0].equals(ipRemota.split("-")[0])){
-                                            this.barco.llamadaRMI(ipRemota.split("-")[1], barco.getRutaOrigen().split("-")[1], maquina.getId());
-                                            barcoGUI.OcultarBarco();
+                                            //this.barco.llamadaRMI(ipRemota.split("-")[1], barco.getRutaOrigen().split("-")[0], maquina.getId());
+                                            //barcoGUI.OcultarBarco();
+                                            volverOrigen = true;
                                         }
                                     }
-                                    return;
                                 //Recoger: True si encontro el corazon de la princesa    
                                 }else if (barco.recoger(maquina.getSitio().get(i)) == true){
                                     //Hacer llamada RMI al punto de origen de barco.
                                     for(String ipRemota: maquina.getIpRemota()){
                                         if(barco.getRutaOrigen().split("-")[0].equals(ipRemota.split("-")[0])){
-                                            this.barco.llamadaRMI(ipRemota.split("-")[1], barco.getRutaOrigen().split("-")[1], maquina.getId());
-                                            barcoGUI.OcultarBarco();
+                                            //this.barco.llamadaRMI(ipRemota.split("-")[1], barco.getRutaOrigen().split("-")[0], maquina.getId());
+                                            //barcoGUI.OcultarBarco();
+                                            volverOrigen = true;
                                         }
                                     }
-                                    return;
                                 }
                                 break;
                             }
                         }
-                        try{
-                            barco.getCofre().getMapa().setSitioActual();
-                            dato = barco.getCofre().getMapa().getRuta().get(barco.getCofre()
-                                    .getMapa().getSitioActual()).split("-");
-                        }catch(Exception e){
+                        if(volverOrigen){
                             dato = barco.getRutaOrigen().split("-");
+                        }else{
+                            try{
+                                barco.getCofre().getMapa().setSitioActual();
+                                dato = barco.getCofre().getMapa().getRuta().get(barco.getCofre()
+                                        .getMapa().getSitioActual()).split("-");
+                            }catch(Exception e){
+                                dato = barco.getRutaOrigen().split("-");
+                            }
                         }
+
                         System.out.println("Ruta: "+dato[1]);
                     }
                 }
