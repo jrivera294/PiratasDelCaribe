@@ -20,8 +20,6 @@ public class PiratasGUI extends javax.swing.JFrame {
     /**
      * Creates new form PiratasGUI
      */
-//    private Barco labelBarco;
-    private Barco BarcoMovement;
     private JPanel PanelPrincipal;
     private Maquina maquina;
     private String destino, destino2;
@@ -75,7 +73,7 @@ public class PiratasGUI extends javax.swing.JFrame {
 
         this.setBounds(0, 0, 1366, 768);
              
-        BarcoMovement = new Barco(PanelPrincipal, "Venganza Errante");
+        //BarcoMovement = new Barco(PanelPrincipal, "Venganza Errante");
     }
     
     /**
@@ -648,8 +646,8 @@ public class PiratasGUI extends javax.swing.JFrame {
             public void windowClosed(java.awt.event.WindowEvent e) {
                 System.out.print(destino);
                 /*Ya obtienes el destino, si es maquina 2 se utilizara el destino2 y destino)*/
-                   BarcoMovement.CrearHilo(0,324,625,324);   //Revisar
-                   BarcoMovement.movimiento.start();
+//                   BarcoMovement.CrearHilo(0,324,625,324);   //Revisar
+//                   BarcoMovement.movimiento.start();
             }
         });
     }//GEN-LAST:event_iniciarMouseClicked
