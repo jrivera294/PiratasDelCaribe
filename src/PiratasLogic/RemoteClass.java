@@ -78,7 +78,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                 idOrigen = barco.getCofre().getMapa().getRuta().get(barco.getCofre()
                         .getMapa().getSitioActual()-1).split("-")[0];
             }*/
-            
+           
             
             System.out.println("idOrigen: "+idOrigen);
             
@@ -88,6 +88,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                     if(sitio.getNombreSitio().equals(barco.getRutaOrigen().split("-")[1])){
                         xOrigen = sitio.getPosX();
                         yOrigen = sitio.getPosY();
+                        System.out.println("xOrigen: "+xOrigen+ " yOrigen: "+yOrigen);
                         barcoGUI.AparecerBarco(xOrigen, yOrigen);
                         
                         //Preguntar por sitio inicial
@@ -108,7 +109,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                 if (nombreSitio.equals(barco.getRutaOrigen()) == true){
                     for(Sitio sitio : maquina.getSitio()){
                         if(sitio.getNombreSitio().equals(nombreSitio)){
-                            //barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
+                            barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
                             break;
                         }
                     }
@@ -140,7 +141,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                     xSalida = parseInt(maquina.getPuntoSalida(dato[0]).split("-")[1].split(",")[0]);
                     ySalida = parseInt(maquina.getPuntoSalida(dato[0]).split("-")[1].split(",")[1]);
                     //System.out.println("Barco moviendose al punto de salida x:"+xSalida+" y:"+ySalida);
-                    //barcoGUI.MoverBarco(xSalida, ySalida);
+                    barcoGUI.MoverBarco(xSalida, ySalida);
                     
                     for (int i=0; i < maquina.getSitioRemoto().size(); i++){
                         String ip[];
@@ -164,7 +165,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                     for(Sitio sitio : maquina.getSitio()){
                         if(sitio.getNombreSitio().equals(dato[1])){
                             System.out.println("Barco moviendose a: "+sitio.getNombreSitio());
-                            //barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
+                            barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
                             break;
                         }
                     }

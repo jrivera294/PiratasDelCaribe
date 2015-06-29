@@ -72,6 +72,12 @@ public class Cofre implements java.io.Serializable{
             //Cantidad a liberar ENTRE peso por obj
                 //Si es entero tomo el numero, si decimales redondear al sig.
                     //Seteo los valores cofreOrigen y cofreDestino
+    /**
+     * Libera espacio en libras de un cofreOrigen a uno destino
+     * @param libras
+     * @param cofreOrigen
+     * @param cofreDestino 
+     */
     public static void liberarEspacio(int libras, Cofre cofreOrigen, Cofre cofreDestino){
         double div, decimal;
         int entero;
