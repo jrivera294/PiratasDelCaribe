@@ -158,6 +158,15 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             if (barco.llamadaRMI(ip[1], dato[0]+"-"+dato[1], maquina.getId()) == false){
                                 System.out.println("Error LlamadaRMI: No se pudo enviar el Barco.");
                                 System.out.println("Buscando siguiente sitio");
+                                
+                                try{
+                                    barco.getCofre().getMapa().setSitioActual();
+                                    dato = barco.getCofre().getMapa().getRuta().get(barco.getCofre()
+                                            .getMapa().getSitioActual()).split("-");
+                                }catch(Exception e){
+                                    dato = barco.getRutaOrigen().split("-");
+                                }
+                                
                                 flag = true;
                             }else{
                                 System.out.println("Barco enviado exitosamente");
