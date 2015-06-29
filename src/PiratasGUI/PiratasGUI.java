@@ -8,8 +8,11 @@ package PiratasGUI;
 import PiratasLogic.Maquina;
 import java.awt.Color;
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -24,7 +27,7 @@ public class PiratasGUI extends javax.swing.JFrame {
     private Maquina maquina;
     private String destino, destino2;
     private VentanaRutas rutas;
-    
+    private JLabel piratax;
     public String getDestino() {
         return destino;
     }
@@ -41,7 +44,7 @@ public class PiratasGUI extends javax.swing.JFrame {
         this.destino2 = destino2;
     }
 //    private JLabel labelBarco;
-    public PiratasGUI(Maquina maquina) {
+    public PiratasGUI(Maquina maquina) throws IOException {
         initComponents();
         /*Ventana*/
         String filePath = new File("").getAbsolutePath();
@@ -72,18 +75,27 @@ public class PiratasGUI extends javax.swing.JFrame {
         PanelPrincipal.setVisible(true);
 
         this.setBounds(0, 0, 1366, 768);
-             
+
         //BarcoMovement = new Barco(PanelPrincipal, "Venganza Errante");
     }
     
-    /**
-     * 
-     * @param NombreBarco Es el nombre del barco al que se quieren actualizar datos (pirata, interceptor, invencible)
-     * @param ValorTripulacion Valor numerico de Tripulacion
-     * @param ValorMuniciones Valor numerico de Municiones
-     * @param ValorComida Valor numerico de Comida
-     * @param ValorCofre Valor numerico de Cofre
-     */
+     public void setEstadoBarcosReset(){
+        this.barcoPirata_Tripulacion.setText("0");
+        this.barcoPirata_Municiones.setText("0");
+        this.barcoPirata_Comida.setText("0");
+        this.barcoPirata_Cofre.setText("0");
+
+        this.barcoInterceptor_Tripulacion.setText("0");
+        this.barcoInterceptor_Municiones.setText("0");
+        this.barcoInterceptor_Comida.setText("0");
+        this.barcoInterceptor_Cofre.setText("0");
+
+        this.barcoInvencible_Tripulacion.setText("0");
+        this.barcoInvencible_Municiones.setText("0");
+        this.barcoInvencible_Comida.setText("0");
+        this.barcoInvencible_Cofre.setText("0");
+        this.repaint();
+     }
     public void setEstadoBarcos(String NombreBarco, int ValorTripulacion, int ValorMuniciones, int ValorComida, int ValorCofre){
         switch(NombreBarco){
             case "Venganza Errante":
@@ -639,17 +651,18 @@ public class PiratasGUI extends javax.swing.JFrame {
     private void iniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarMouseClicked
         // TODO add your handling code here:
         //this.BarcoMovement.AparecerBarco(10, 100);
-        rutas.setVisible(true);
-        /*Cuando la ventana se cierra*/
-        rutas.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(java.awt.event.WindowEvent e) {
-                System.out.print(destino);
-                /*Ya obtienes el destino, si es maquina 2 se utilizara el destino2 y destino)*/
-//                   BarcoMovement.CrearHilo(0,324,625,324);   //Revisar
-//                   BarcoMovement.movimiento.start();
-            }
-        });
+        this.setEstadoBarcosReset();
+//        rutas.setVisible(true);
+//        /*Cuando la ventana se cierra*/
+//        rutas.addWindowListener(new java.awt.event.WindowAdapter() {
+//            @Override
+//            public void windowClosed(java.awt.event.WindowEvent e) {
+//                System.out.print(destino);
+//                /*Ya obtienes el destino, si es maquina 2 se utilizara el destino2 y destino)*/
+////                   BarcoMovement.CrearHilo(0,324,625,324);   //Revisar
+////                   BarcoMovement.movimiento.start();
+//            }
+//        });
     }//GEN-LAST:event_iniciarMouseClicked
 /*Lista de String de sitios, leer cada una y setear*/
     /**
