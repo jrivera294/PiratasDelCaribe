@@ -244,6 +244,7 @@ public class Barco implements java.io.Serializable{
                 System.out.println("Barco: "+this.nombre+" recogió un mapa");
             }else{
                 if(this.cofre.getMapa().getRuta().size()-this.cofre.getMapa().getSitioActual() > sitio.getCofre().getMapa().getRuta().size()){
+                    this.cofre.getMapa().setSitioActual(0);
                     auxMapa = this.cofre.getMapa();
                     this.cofre.setMapa(sitio.getCofre().getMapa());
                     sitio.getCofre().setMapa(auxMapa);
