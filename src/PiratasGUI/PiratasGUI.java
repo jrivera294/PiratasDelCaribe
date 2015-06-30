@@ -27,7 +27,8 @@ public class PiratasGUI extends javax.swing.JFrame {
     private Maquina maquina;
     private String destino, destino2;
     private VentanaRutas rutas;
-    private JLabel piratax;
+    private String filePath = new File("").getAbsolutePath();
+    
     public String getDestino() {
         return destino;
     }
@@ -44,7 +45,7 @@ public class PiratasGUI extends javax.swing.JFrame {
         this.destino2 = destino2;
     }
 //    private JLabel labelBarco;
-    public PiratasGUI(Maquina maquina) throws IOException {
+    public PiratasGUI(Maquina maquina){
         initComponents();
         /*Ventana*/
         String filePath = new File("").getAbsolutePath();
@@ -72,14 +73,25 @@ public class PiratasGUI extends javax.swing.JFrame {
         
         add(PanelPrincipal);
         
+        /*Estadisticas en nulo. Imagenes con las X*/
+        piratax.setIcon(new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "pirataX.png"));
+        piratax.setVisible(false);
+        reinax.setIcon(new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "interceptorX.png"));
+        reinax.setVisible(false);
+        reinax2.setIcon(new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "invencibleX.png"));
+        reinax2.setVisible(false);
+        
         PanelPrincipal.setVisible(true);
-
         this.setBounds(0, 0, 1366, 768);
 
         //BarcoMovement = new Barco(PanelPrincipal, "Venganza Errante");
     }
     
      public void setEstadoBarcosReset(){
+        /*Imagenes con las X*/ 
+        piratax.setVisible(true);
+        reinax.setVisible(true);
+        reinax2.setVisible(true);
         this.barcoPirata_Tripulacion.setText("0");
         this.barcoPirata_Municiones.setText("0");
         this.barcoPirata_Comida.setText("0");
@@ -99,6 +111,7 @@ public class PiratasGUI extends javax.swing.JFrame {
     public void setEstadoBarcos(String NombreBarco, int ValorTripulacion, int ValorMuniciones, int ValorComida, int ValorCofre){
         switch(NombreBarco){
             case "Venganza Errante":
+                piratax.setVisible(false);
                 this.barcoPirata_Tripulacion.setText(ValorTripulacion + "");
                 this.barcoPirata_Municiones.setText(ValorMuniciones + "");
                 this.barcoPirata_Comida.setText(ValorComida + "");
@@ -106,6 +119,7 @@ public class PiratasGUI extends javax.swing.JFrame {
                 break;
                 
             case "Interceptor":   
+                reinax.setVisible(false);
                 this.barcoInterceptor_Tripulacion.setText(ValorTripulacion + "");
                 this.barcoInterceptor_Municiones.setText(ValorMuniciones + "");
                 this.barcoInterceptor_Comida.setText(ValorComida + "");
@@ -113,6 +127,7 @@ public class PiratasGUI extends javax.swing.JFrame {
                 break;
                 
             case "Invencible":   
+                reinax2.setVisible(false);
                 this.barcoInvencible_Tripulacion.setText(ValorTripulacion + "");
                 this.barcoInvencible_Municiones.setText(ValorMuniciones + "");
                 this.barcoInvencible_Comida.setText(ValorComida + "");
@@ -120,6 +135,7 @@ public class PiratasGUI extends javax.swing.JFrame {
                 break;    
         }
         this.repaint();
+        
     }
 
     public JPanel getPanelPrincipal() {
@@ -138,6 +154,7 @@ public class PiratasGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         barcoPiratainf = new FondoPanel("/images/pirata.png");
+        piratax = new javax.swing.JLabel();
         panelBarcoEstadistica = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -153,6 +170,7 @@ public class PiratasGUI extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         barcoPirata_Cofre = new javax.swing.JLabel();
         barcoReinainf2 = new FondoPanel("/images/invencible.png");
+        reinax2 = new javax.swing.JLabel();
         panelBarcoEstadistica2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -168,6 +186,7 @@ public class PiratasGUI extends javax.swing.JFrame {
         jLabel42 = new javax.swing.JLabel();
         barcoInvencible_Cofre = new javax.swing.JLabel();
         barcoReinainf = new FondoPanel("/images/interceptor.png");
+        reinax = new javax.swing.JLabel();
         panelBarcoEstadistica1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -184,7 +203,6 @@ public class PiratasGUI extends javax.swing.JFrame {
         barcoInterceptor_Cofre = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         iniciar = new javax.swing.JMenu();
-        cargar = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 255));
@@ -196,6 +214,8 @@ public class PiratasGUI extends javax.swing.JFrame {
         barcoPiratainf.setMaximumSize(new java.awt.Dimension(158, 240));
         barcoPiratainf.setMinimumSize(new java.awt.Dimension(158, 240));
         barcoPiratainf.setPreferredSize(new java.awt.Dimension(158, 240));
+
+        piratax.setAlignmentX(0.5F);
 
         panelBarcoEstadistica.setBackground(new Color(0,0,0,0));
         panelBarcoEstadistica.setMaximumSize(new java.awt.Dimension(90, 240));
@@ -328,6 +348,10 @@ public class PiratasGUI extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(EstadisticaBarco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(barcoPiratainfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(barcoPiratainfLayout.createSequentialGroup()
+                    .addComponent(piratax, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         barcoPiratainfLayout.setVerticalGroup(
             barcoPiratainfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,12 +360,16 @@ public class PiratasGUI extends javax.swing.JFrame {
                 .addGroup(barcoPiratainfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelBarcoEstadistica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(EstadisticaBarco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(barcoPiratainfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(piratax, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
         );
 
         getContentPane().add(barcoPiratainf);
         barcoPiratainf.setBounds(10, 4, 158, 240);
 
         barcoReinainf2.setPreferredSize(new java.awt.Dimension(158, 240));
+
+        reinax2.setAlignmentX(0.5F);
 
         panelBarcoEstadistica2.setBackground(new Color(0,0,0,0));
         panelBarcoEstadistica2.setMaximumSize(new java.awt.Dimension(90, 240));
@@ -472,6 +500,10 @@ public class PiratasGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EstadisticaBarco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
+            .addGroup(barcoReinainf2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(barcoReinainf2Layout.createSequentialGroup()
+                    .addComponent(reinax2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 58, Short.MAX_VALUE)))
         );
         barcoReinainf2Layout.setVerticalGroup(
             barcoReinainf2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -480,12 +512,18 @@ public class PiratasGUI extends javax.swing.JFrame {
                     .addComponent(panelBarcoEstadistica2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(EstadisticaBarco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(barcoReinainf2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(reinax2, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
         );
 
         getContentPane().add(barcoReinainf2);
         barcoReinainf2.setBounds(10, 490, 158, 240);
 
         barcoReinainf.setPreferredSize(new java.awt.Dimension(158, 240));
+
+        reinax.setAlignmentX(0.5F);
+        reinax.setPreferredSize(new java.awt.Dimension(158, 240));
+        reinax.setRequestFocusEnabled(false);
 
         panelBarcoEstadistica1.setBackground(new Color(0,0,0,0));
         panelBarcoEstadistica1.setMaximumSize(new java.awt.Dimension(90, 240));
@@ -617,6 +655,10 @@ public class PiratasGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EstadisticaBarco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(barcoReinainfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(barcoReinainfLayout.createSequentialGroup()
+                    .addComponent(reinax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 17, Short.MAX_VALUE)))
         );
         barcoReinainfLayout.setVerticalGroup(
             barcoReinainfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -626,6 +668,8 @@ public class PiratasGUI extends javax.swing.JFrame {
             .addGroup(barcoReinainfLayout.createSequentialGroup()
                 .addComponent(EstadisticaBarco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(barcoReinainfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(reinax, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(barcoReinainf);
@@ -639,9 +683,6 @@ public class PiratasGUI extends javax.swing.JFrame {
         });
         jMenuBar1.add(iniciar);
         iniciar.getAccessibleContext().setAccessibleDescription("");
-
-        cargar.setText("Cargar XML");
-        jMenuBar1.add(cargar);
 
         setJMenuBar(jMenuBar1);
 
@@ -718,7 +759,6 @@ public class PiratasGUI extends javax.swing.JFrame {
     private javax.swing.JPanel barcoPiratainf;
     private javax.swing.JPanel barcoReinainf;
     private javax.swing.JPanel barcoReinainf2;
-    private javax.swing.JMenu cargar;
     private javax.swing.JMenu iniciar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -748,5 +788,8 @@ public class PiratasGUI extends javax.swing.JFrame {
     private javax.swing.JPanel panelBarcoEstadistica;
     private javax.swing.JPanel panelBarcoEstadistica1;
     private javax.swing.JPanel panelBarcoEstadistica2;
+    private javax.swing.JLabel piratax;
+    private javax.swing.JLabel reinax;
+    private javax.swing.JLabel reinax2;
     // End of variables declaration//GEN-END:variables
 }
