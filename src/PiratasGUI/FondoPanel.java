@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  */
 public class FondoPanel extends JPanel{
     private Image fondoFrame;
-    
+
      /**
       * Constructor que recibe el archivo de la imagen y crea el fondo.
       * Error en caso de no encontrar el archivo.
