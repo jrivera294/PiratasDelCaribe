@@ -35,7 +35,7 @@ public class Main {
         BufferedReader buf = new BufferedReader(ent);
         String numPuerto, URLRegistro;
        
-        System.setProperty("java.rmi.server.hostname", "192.168.110.127");
+        System.setProperty("java.rmi.server.hostname", "192.168.0.108");
         
         try {
                 Mapa mapa;
@@ -100,7 +100,7 @@ public class Main {
            System.out.println("Iniciando server RMI. Port:  "+numPuerto);
            arrancarRegistro(numPuerto);
            RemoteClass objetoRemoto = new RemoteClass(objeto,graphicInterface);
-           URLRegistro = "rmi://192.168.110.127:"+numPuerto+"/barco";
+           URLRegistro = "rmi://192.168.0.108:"+numPuerto+"/barco";
            
            Naming.rebind(URLRegistro,objetoRemoto);
            System.out.println("Servidor registrado. El registro contiene actualmente:");

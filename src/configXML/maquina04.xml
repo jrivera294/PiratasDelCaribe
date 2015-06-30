@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <maquina id="4">
-	<ip>192.168.0.112</ip>
-        <ipRemota>1-192.168.0.108</ipRemota>
+	<ip>192.168.0.101</ip>
+        <ipRemota>1-192.168.0.111</ipRemota>
         <ipRemota>2-192.168.0.105</ipRemota>
-        <ipRemota>3-192.168.0.101</ipRemota>
-        <ipRemota>4-192.168.0.112</ipRemota>
+        <ipRemota>3-192.168.0.112</ipRemota>
+        <ipRemota>4-192.168.0.101</ipRemota>
 	<salida>1-0,0</salida>
 	<salida>2-598,0</salida>
 	<salida>3-0,384</salida>
