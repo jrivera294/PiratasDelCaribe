@@ -27,7 +27,6 @@ public class Barco implements java.io.Serializable{
     private int maxMuniciones;
     private transient BarcoGUI barcoGUI;
     private transient PiratasGUI graphicInterface;
-    private boolean pelear;
 
     public void reabastecer(){
         this.setTripulacion(this.getMaxTripulacion());
@@ -78,51 +77,42 @@ public class Barco implements java.io.Serializable{
     public boolean irBatalla(Sitio sitio){
         int bajaTripulacion=0, bajaMunicion=0, tesoro = 0;
         Barco barcoOponente = new Barco();
-        
-        for (int i=0; i < sitio.getBarcoLocal().size(); i++){
-            if (this.getNombre().equals(sitio.getBarcoLocal().get(i).getNombre()) == false){
-                barcoOponente = sitio.getBarcoLocal().get(i);
-                break;
+
+        //Evaluo si los tipos de los barcos son diferentes, para ir a batalla.
+        if (sitio.getBarcoPirata() != null){
+            if (this.getTipo() != sitio.getBarcoPirata().getTipo()){
+                barcoOponente = sitio.getBarcoPirata();
+            }
+        }else if (sitio.getBarcoNaval() != null){
+            if (this.getTipo() != sitio.getBarcoNaval().getTipo()){
+                barcoOponente = sitio.getBarcoPirata();
             }
         }
-        //Muestro ventana de si deseo pelear o no
-        //si la respuesta es OK peleo, sino no.
-        if (pelear == true){
-            //Quito recursos de cada barco.
-            
-            //Bajas de Tripulacion y Municiones = A la mitad de sus diferencias.
-            bajaTripulacion = (this.getTripulacion() - barcoOponente.getTripulacion())/2;
-            bajaMunicion = (this.getMuniciones() - barcoOponente.getTripulacion())/2;
-            
-            //Seteo los valores de los barcos luego de las bajas.
-            this.setTripulacion(this.getTripulacion() - bajaTripulacion);
-            barcoOponente.setTripulacion(barcoOponente.getTripulacion() - bajaTripulacion);
-            this.setMuniciones(this.getMuniciones() - bajaMunicion);
-            barcoOponente.setMuniciones(barcoOponente.getMuniciones() - bajaMunicion);
-            
-            //Si la tripulacion en alguno de los barcos es < 1/3
-            if (this.getTripulacion() < (1/3)){
-                tesoro = (this.getCofre().getCapacidadActual())/2;
-                
-                Cofre.liberarEspacio(tesoro, this.getCofre(), sitio.getCofre());
-                
-                //Va a su puerto de Origen a reabastecer
-                this.irASitio(this.getRutaOrigen());
-                
-            }else if (barcoOponente.getTripulacion() < (1/3)){
-                tesoro = (barcoOponente.getCofre().getCapacidadActual())/2;
-                
-                Cofre.liberarEspacio(tesoro, barcoOponente.getCofre(), sitio.getCofre());
-                
-                //Va a su puerto de Origen a reabastecer
-                barcoOponente.irASitio(barcoOponente.getRutaOrigen());
-            }
-            
-            //actualizo labels.
-        }else{
-            this.getCofre().getMapa().setSitioActual();
-            String nextSitio = this.cofre.getMapa().getRuta().get(this.getCofre().getMapa().getSitioActual());
-            this.irASitio(nextSitio);
+
+        //Bajas de Tripulacion y Municiones = A la mitad de sus diferencias.
+        bajaTripulacion = Math.abs(this.getTripulacion() - barcoOponente.getTripulacion())/2;
+        bajaMunicion = Math.abs(this.getMuniciones() - barcoOponente.getTripulacion())/2;
+
+        //Seteo los valores de los barcos luego de las bajas.
+        this.setTripulacion(this.getTripulacion() - bajaTripulacion);
+        barcoOponente.setTripulacion(barcoOponente.getTripulacion() - bajaTripulacion);
+        this.setMuniciones(this.getMuniciones() - bajaMunicion);
+        barcoOponente.setMuniciones(barcoOponente.getMuniciones() - bajaMunicion);
+
+        //Si la tripulacion en alguno de los barcos es < 1/3
+        if (this.getTripulacion() < (this.getTripulacion()/3)){
+            tesoro = (this.getCofre().getCapacidadActual())/2;       
+            Cofre.liberarEspacio(tesoro, this.getCofre(), sitio.getCofre());                
+
+            //Va a su puerto de Origen a reabastecer
+
+        }else if (barcoOponente.getTripulacion() < (barcoOponente.getTripulacion()/3)){
+            tesoro = (barcoOponente.getCofre().getCapacidadActual())/2;
+
+            Cofre.liberarEspacio(tesoro, barcoOponente.getCofre(), sitio.getCofre());
+
+            //Va a su puerto de Origen a reabastecer
+
         }
     return true;    
     }
@@ -244,6 +234,7 @@ public class Barco implements java.io.Serializable{
                 System.out.println("Barco: "+this.nombre+" recogió un mapa");
             }else{
                 if(this.cofre.getMapa().getRuta().size()-this.cofre.getMapa().getSitioActual() > sitio.getCofre().getMapa().getRuta().size()){
+                    this.cofre.getMapa().setSitioActual(0);
                     auxMapa = this.cofre.getMapa();
                     this.cofre.setMapa(sitio.getCofre().getMapa());
                     sitio.getCofre().setMapa(auxMapa);
