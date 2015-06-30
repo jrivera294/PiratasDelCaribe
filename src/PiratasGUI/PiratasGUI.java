@@ -75,39 +75,77 @@ public class PiratasGUI extends javax.swing.JFrame {
         
         /*Estadisticas en nulo. Imagenes con las X*/
         piratax.setIcon(new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "pirataX.png"));
-        piratax.setVisible(false);
+        piratax.setVisible(true);
         reinax.setIcon(new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "interceptorX.png"));
-        reinax.setVisible(false);
+        reinax.setVisible(true);
         reinax2.setIcon(new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "invencibleX.png"));
-        reinax2.setVisible(false);
+        reinax2.setVisible(true);
         
+        /*Valores en cero*/
+        this.barcoPirata_Tripulacion.setText("0");
+        this.barcoPirata_Municiones.setText("0");
+        this.barcoPirata_Comida.setText("0");
+        this.barcoPirata_Cofre.setText("0");
+        this.barcoInterceptor_Tripulacion.setText("0");
+        this.barcoInterceptor_Municiones.setText("0");
+        this.barcoInterceptor_Comida.setText("0");
+        this.barcoInterceptor_Cofre.setText("0");
+        this.barcoInvencible_Tripulacion.setText("0");
+        this.barcoInvencible_Municiones.setText("0");
+        this.barcoInvencible_Comida.setText("0");
+        this.barcoInvencible_Cofre.setText("0");
         PanelPrincipal.setVisible(true);
         this.setBounds(0, 0, 1366, 768);
 
         //BarcoMovement = new Barco(PanelPrincipal, "Venganza Errante");
     }
     
-     public void setEstadoBarcosReset(){
-        /*Imagenes con las X*/ 
-        piratax.setVisible(true);
-        reinax.setVisible(true);
-        reinax2.setVisible(true);
-        this.barcoPirata_Tripulacion.setText("0");
-        this.barcoPirata_Municiones.setText("0");
-        this.barcoPirata_Comida.setText("0");
-        this.barcoPirata_Cofre.setText("0");
-
-        this.barcoInterceptor_Tripulacion.setText("0");
-        this.barcoInterceptor_Municiones.setText("0");
-        this.barcoInterceptor_Comida.setText("0");
-        this.barcoInterceptor_Cofre.setText("0");
-
-        this.barcoInvencible_Tripulacion.setText("0");
-        this.barcoInvencible_Municiones.setText("0");
-        this.barcoInvencible_Comida.setText("0");
-        this.barcoInvencible_Cofre.setText("0");
+     public void setEstadoBarcoReset(String NombreBarco){
+        switch(NombreBarco){
+            case "Venganza Errante":
+                piratax.setVisible(true);
+                this.barcoPirata_Tripulacion.setText("0");
+                this.barcoPirata_Municiones.setText("0");
+                this.barcoPirata_Comida.setText("0");
+                this.barcoPirata_Cofre.setText("0");
+                break;
+                
+            case "Interceptor":   
+                reinax.setVisible(true);
+                this.barcoInterceptor_Tripulacion.setText("0");
+                this.barcoInterceptor_Municiones.setText("0");
+                this.barcoInterceptor_Comida.setText("0");
+                this.barcoInterceptor_Cofre.setText("0");
+                break;
+                
+            case "Invencible":   
+                reinax2.setVisible(true);
+                this.barcoInvencible_Tripulacion.setText("0");
+                this.barcoInvencible_Municiones.setText("0");
+                this.barcoInvencible_Comida.setText("0");
+                this.barcoInvencible_Cofre.setText("0");
+                break;
+            default:
+                reinax2.setVisible(true);
+                this.barcoInvencible_Tripulacion.setText("0");
+                this.barcoInvencible_Municiones.setText("0");
+                this.barcoInvencible_Comida.setText("0");
+                this.barcoInvencible_Cofre.setText("0");
+                reinax.setVisible(true);
+                this.barcoInterceptor_Tripulacion.setText("0");
+                this.barcoInterceptor_Municiones.setText("0");
+                this.barcoInterceptor_Comida.setText("0");
+                this.barcoInterceptor_Cofre.setText("0");
+                piratax.setVisible(true);
+                this.barcoPirata_Tripulacion.setText("0");
+                this.barcoPirata_Municiones.setText("0");
+                this.barcoPirata_Comida.setText("0");
+                this.barcoPirata_Cofre.setText("0");
+                break;
+        }
         this.repaint();
-     }
+        
+    }
     public void setEstadoBarcos(String NombreBarco, int ValorTripulacion, int ValorMuniciones, int ValorComida, int ValorCofre){
         switch(NombreBarco){
             case "Venganza Errante":
@@ -692,7 +730,6 @@ public class PiratasGUI extends javax.swing.JFrame {
     private void iniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarMouseClicked
         // TODO add your handling code here:
         //this.BarcoMovement.AparecerBarco(10, 100);
-        this.setEstadoBarcosReset();
 //        rutas.setVisible(true);
 //        /*Cuando la ventana se cierra*/
 //        rutas.addWindowListener(new java.awt.event.WindowAdapter() {
