@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.*;
  */
 
 public class Sitio {
-    private List<Barco> barcoLocal;
+    private Barco barcoPirata, barcoNaval;
     private String isla;
     private String nombreSitio;
     private Cofre cofre;
@@ -40,12 +40,20 @@ public class Sitio {
         this.costoComida = costoComida;
     }
 
-    public List<Barco> getBarcoLocal() {
-        return barcoLocal;
+    public Barco getBarcoPirata() {
+        return barcoPirata;
     }
 
-    public void setBarcoLocal(List<Barco> barcoLocal) {
-        this.barcoLocal = barcoLocal;
+    public void setBarcoPirata(Barco barcoPirata) {
+        this.barcoPirata = barcoPirata;
+    }
+
+    public Barco getBarcoNaval() {
+        return barcoNaval;
+    }
+
+    public void setBarcoNaval(Barco naval) {
+        this.barcoNaval = naval;
     }
     
     public int getPosX() {

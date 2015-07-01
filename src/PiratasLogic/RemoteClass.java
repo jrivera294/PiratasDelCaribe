@@ -150,7 +150,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                     xSalida = parseInt(maquina.getPuntoSalida(dato[0]).split("-")[1].split(",")[0]);
                     ySalida = parseInt(maquina.getPuntoSalida(dato[0]).split("-")[1].split(",")[1]);
                     //System.out.println("Barco moviendose al punto de salida x:"+xSalida+" y:"+ySalida);
-                    barcoGUI.MoverBarco(xSalida, ySalida);
+                    barcoGUI.MoverBarco(xSalida, ySalida);                    
                     
                     for (int i=0; i < maquina.getSitioRemoto().size(); i++){
                         String ip[];
@@ -172,6 +172,11 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             }else{
                                 System.out.println("Barco enviado exitosamente");
                                 barcoGUI.OcultarBarco();
+                                if (barco.getTipo() == 1){
+                                    maquina.getSitio().get(i).setBarcoPirata(null);
+                                }else if (barco.getTipo() == 2){
+                                    maquina.getSitio().get(i).setBarcoNaval(null);
+                                }
                                 return;
                             }
                             break;
@@ -184,19 +189,27 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                         if(sitio.getNombreSitio().equals(dato[1])){
                             System.out.println("Barco moviendose a: "+sitio.getNombreSitio());
                             barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
+                            //Reviso el tipo de barco, si es Pirata (1) o Naval (2)
+                            if (barco.getTipo() == 1){
+                                sitio.setBarcoPirata(barco);
+                            }else if (barco.getTipo() == 2){
+                                sitio.setBarcoNaval(barco);
+                            }
+                            barco.irBatalla(sitio);
                             break;
                         }
-                    }
+                    }      
+                    
                     
                     //Determinar si se dirige al origen
                     if (dato[1].equals(barco.getRutaOrigen().split("-")[1]) == true){
                         System.out.println("Voy al origen");
-                        for(Sitio sitio : maquina.getSitio()){
+                        /*for(Sitio sitio : maquina.getSitio()){
                             if(sitio.getNombreSitio().equals(nombreSitio)){
                                 barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
                                 break;
                             }
-                        }
+                        }*/
                         //Esperar que el barco termine de moverse
 
                         if (barco.getCofre().getCorazonPrincesa() != 0){

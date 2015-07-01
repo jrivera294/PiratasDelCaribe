@@ -35,7 +35,7 @@ public class Main {
         BufferedReader buf = new BufferedReader(ent);
         String numPuerto, URLRegistro;
        
-        System.setProperty("java.rmi.server.hostname", "192.168.0.108");
+        System.setProperty("java.rmi.server.hostname", "192.168.0.111");
         
         try {
                 Mapa mapa;
@@ -100,7 +100,7 @@ public class Main {
            System.out.println("Iniciando server RMI. Port:  "+numPuerto);
            arrancarRegistro(numPuerto);
            RemoteClass objetoRemoto = new RemoteClass(objeto,graphicInterface);
-           URLRegistro = "rmi://192.168.0.108:"+numPuerto+"/barco";
+           URLRegistro = "rmi://192.168.0.111:"+numPuerto+"/barco";
            
            Naming.rebind(URLRegistro,objetoRemoto);
            System.out.println("Servidor registrado. El registro contiene actualmente:");
@@ -119,14 +119,14 @@ public class Main {
             barco.setCofre(cBarco);
             barco.reabastecer();
             barco.llamadaRMI("192.168.1.125","",2);
-        }*/
-        
-//        Barco barco = objeto.getBarco().get(0);
-//        Cofre cBarco = new Cofre(barco.getCofre().getCapacidad());
-//        barco.setCofre(cBarco);
-//        barco.reabastecer();
-//        barco.llamadaRMI("192.168.110.127","",1);
-//        System.out.println("Barco: "+barco.getNombre());
+        }
+        */
+        Barco barco = objeto.getBarco().get(0);
+        Cofre cBarco = new Cofre(barco.getCofre().getCapacidad());
+        barco.setCofre(cBarco);
+        barco.reabastecer();
+        barco.llamadaRMI("192.168.0.111","",1);
+        System.out.println("Barco: "+barco.getNombre());
        
 
     }
