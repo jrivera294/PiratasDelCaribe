@@ -175,7 +175,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             }else{
                                 System.out.println("Barco enviado exitosamente");
                                 barcoGUI.OcultarBarco();
-                                graphicInterface.setEstadoBarcoReset(barco.getNombre());
+                                graphicInterface.setEstadoBarcoReset(barco);
                                 
                                 return;
                             }
@@ -202,14 +202,14 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                                 if (barco.getTipo() == 1){
                                     sitio.setBarcoPirata(barco);
                                     if(sitio.getBarcoNaval() != null){
-                                        barcoGUI.AparecerBarco(sitio.getPosX(), sitio.getPosY());
+                                        barcoGUI.aparecerPelea(sitio.getPosX(),sitio.getPosY());
                                         barco.irBatalla(sitio);
                                         barcoGUI.ocultarPelea();
                                     }
                                 }else if (barco.getTipo() == 2){
                                     sitio.setBarcoNaval(barco);
                                     if(sitio.getBarcoPirata() != null){
-                                        barcoGUI.AparecerBarco(sitio.getPosX(), sitio.getPosY());
+                                        barcoGUI.aparecerPelea(sitio.getPosX(),sitio.getPosY());
                                         barco.irBatalla(sitio);
                                         barcoGUI.ocultarPelea();
                                     }

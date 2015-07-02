@@ -23,22 +23,17 @@ public class BarcoGUI extends javax.swing.JLabel{
     public int llegada;
     private JPanel panel;
     private String filePath = new File("").getAbsolutePath();
-    
     private JLabel labelPelea;
     
     /*Imagenes*/
-    private ImageIcon imageBarco, kraken, tormenta, tornado ;
+    private ImageIcon imageBarco, kraken, tormenta, tornado, peleaPirata, peleaR1, peleaR2 ;
       
     public BarcoGUI(JPanel p, String nombreBarco){
         panel = p;
         panel.setLayout(null);
         barcoAnimated = new AnimationClass();
         labelBarco = new JLabel();
-        
-        labelPelea= new JLabel();
-        
-        labelPelea.setIcon(new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "pelea.png"));
-        
+        labelPelea = new JLabel();
         /*Imagenes*/
         switch (nombreBarco){
             case "Venganza Errante":
@@ -46,19 +41,21 @@ public class BarcoGUI extends javax.swing.JLabel{
                 kraken =  new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "barcoPkraken.png");
                 tornado = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "barcoPtornado.png");
                 tormenta = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "barcoPtormenta.png");
-                
+                //peleaPirata = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "barcoPirataP.png"); 
                 break;
             case "Invencible": 
-                imageBarco = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "interceptorBarco.png");
+                imageBarco = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "invenBarco.png");
                 kraken =  new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "intercepkraken.png");
                 tornado = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "interceptornado.png");
                 tormenta = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "interceptormenta.png");
+                //peleaR2 = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "invenBarcoP.png");
                 break;
             case "Interceptor": 
-                imageBarco = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "invenBarco.png");
+                imageBarco = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "interceptorBarco.png");
                 kraken =  new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "invenkraken.png");
                 tornado = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "inventornado.png");
                 tormenta = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "inventormenta.png");
+                //peleaR1 = new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "interceptorBarcoP.png");
                 break;    
         }
         labelBarco.setIcon(this.imageBarco);
@@ -80,13 +77,13 @@ public class BarcoGUI extends javax.swing.JLabel{
 
    }
    public void aparecerPelea(int x, int y){
-        panel.add(labelPelea);
-        labelPelea.setBounds(x, y, 150, 136);
-        labelPelea.setVisible(true);  
+       labelPelea.setBounds(x-50,y-50,150,136);
+       labelPelea.setVisible(true);
+       panel.add(labelPelea);
    }
    
    public void ocultarPelea(){
-       labelPelea.setVisible(false);
+        labelPelea.setVisible(false);
    }
    
    public void OcultarBarco(){
