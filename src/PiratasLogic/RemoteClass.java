@@ -11,6 +11,7 @@ import PiratasGUI.VentanaRutas;
 import static java.lang.Integer.parseInt;
 import java.rmi.*;
 import java.rmi.server.*;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -21,6 +22,7 @@ import javax.swing.JPanel;
  * @author Jose Gabriel
  */
 public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
+    private Semaphore mutex = new Semaphore(1);
     private Maquina maquina;
     private PiratasGUI graphicInterface;
     
@@ -172,12 +174,8 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             }else{
                                 System.out.println("Barco enviado exitosamente");
                                 barcoGUI.OcultarBarco();
+                                graphicInterface.setEstadoBarcoReset(barco.getNombre());
                                 
-                                if (barco.getTipo() == 1){
-                                    maquina.getSitio().get(i).setBarcoPirata(null);
-                                }else if (barco.getTipo() == 2){
-                                    maquina.getSitio().get(i).setBarcoNaval(null);
-                                }
                                 return;
                             }
                             break;
@@ -190,13 +188,15 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                         if(sitio.getNombreSitio().equals(dato[1])){
                             System.out.println("Barco moviendose a: "+sitio.getNombreSitio());
                             barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
+                            
                             //Reviso el tipo de barco, si es Pirata (1) o Naval (2)
                             if (barco.getTipo() == 1){
                                 sitio.setBarcoPirata(barco);
                             }else if (barco.getTipo() == 2){
                                 sitio.setBarcoNaval(barco);
                             }
-                            barco.irBatalla(sitio);
+                            
+                            
                             break;
                         }
                     }      
