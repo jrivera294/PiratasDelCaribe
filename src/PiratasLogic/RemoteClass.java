@@ -11,6 +11,7 @@ import PiratasGUI.VentanaRutas;
 import static java.lang.Integer.parseInt;
 import java.rmi.*;
 import java.rmi.server.*;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -21,6 +22,7 @@ import javax.swing.JPanel;
  * @author Jose Gabriel
  */
 public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
+    private Semaphore mutex = new Semaphore(1);
     private Maquina maquina;
     private PiratasGUI graphicInterface;
     
@@ -50,6 +52,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
         private BarcoGUI barcoGUI;
         private Maquina maquina;
         private int idOrigen;
+        private Sitio sitioActual;
 
         public Hilo(Barco barco, String nombreSitio, PiratasGUI graphicInterface, Maquina maquina, int idOrigen) {
             this.barco = barco;
@@ -173,11 +176,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                                 System.out.println("Barco enviado exitosamente");
                                 barcoGUI.OcultarBarco();
                                 graphicInterface.setEstadoBarcoReset(barco.getNombre());
-                                if (barco.getTipo() == 1){
-                                    maquina.getSitio().get(i).setBarcoPirata(null);
-                                }else if (barco.getTipo() == 2){
-                                    maquina.getSitio().get(i).setBarcoNaval(null);
-                                }
+                                
                                 return;
                             }
                             break;
@@ -190,13 +189,33 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                         if(sitio.getNombreSitio().equals(dato[1])){
                             System.out.println("Barco moviendose a: "+sitio.getNombreSitio());
                             barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
+                            sitioActual = sitio;
+                            
                             //Reviso el tipo de barco, si es Pirata (1) o Naval (2)
-                            if (barco.getTipo() == 1){
-                                sitio.setBarcoPirata(barco);
-                            }else if (barco.getTipo() == 2){
-                                sitio.setBarcoNaval(barco);
+                            if (barco.getRutaOrigen().split("-")[1].equals(sitio.getNombreSitio()) == false){
+                                try {
+                                    mutex.acquire();
+                                } catch (InterruptedException ex) {
+                                    Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+
+                                if (barco.getTipo() == 1){
+                                    sitio.setBarcoPirata(barco);
+                                    if(sitio.getBarcoNaval() != null){
+                                        barcoGUI.AparecerBarco(sitio.getPosX(), sitio.getPosY());
+                                        barco.irBatalla(sitio);
+                                        barcoGUI.ocultarPelea();
+                                    }
+                                }else if (barco.getTipo() == 2){
+                                    sitio.setBarcoNaval(barco);
+                                    if(sitio.getBarcoPirata() != null){
+                                        barcoGUI.AparecerBarco(sitio.getPosX(), sitio.getPosY());
+                                        barco.irBatalla(sitio);
+                                        barcoGUI.ocultarPelea();
+                                    }
+                                }
+                                mutex.release();
                             }
-                            barco.irBatalla(sitio);
                             break;
                         }
                     }      
@@ -284,11 +303,22 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
 
                         System.out.println("Ruta: "+dato[1]);
                     }
-                }
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
+                    try {
+                        Thread.sleep(5000);
+                        if (barco.getRutaOrigen().split("-")[1].equals(sitioActual.getNombreSitio()) == false){
+                            mutex.acquire();
+                        
+                            if (barco.getTipo() == 1){
+                                sitioActual.setBarcoPirata(null);
+                            }else if (barco.getTipo() == 2){
+                                sitioActual.setBarcoNaval(null);
+                            }
+                            mutex.release();
+                        }
+                        
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }         
