@@ -24,6 +24,8 @@ public class BarcoGUI extends javax.swing.JLabel{
     private JPanel panel;
     private String filePath = new File("").getAbsolutePath();
     
+    private JLabel labelPelea;
+    
     /*Imagenes*/
     private ImageIcon imageBarco, kraken, tormenta, tornado ;
       
@@ -31,6 +33,8 @@ public class BarcoGUI extends javax.swing.JLabel{
         panel = p;
         barcoAnimated = new AnimationClass();
         labelBarco = new JLabel();
+        
+        labelPelea= new JLabel();
         
         /*Imagenes*/
         switch (nombreBarco){
@@ -72,6 +76,17 @@ public class BarcoGUI extends javax.swing.JLabel{
        labelBarco.setVisible(true);
        System.out.println("Aparecer X: "+x+" Y: "+y);
 
+   }
+   public void aparecerPelea(int x, int y){
+       this.add(labelPelea);
+        labelPelea.setIcon(new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "pelea.png"));
+        labelPelea.setBounds(x, y, 150, 136);
+        labelPelea.setVisible(true);
+       
+   }
+   
+   public void ocultarPelea(){
+       labelPelea.setVisible(false);
    }
    
    public void OcultarBarco(){

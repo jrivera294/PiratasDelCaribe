@@ -192,27 +192,30 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             sitioActual = sitio;
                             
                             //Reviso el tipo de barco, si es Pirata (1) o Naval (2)
-                            System.out.println("Barco Batalla Tipo: "+barco.getTipo());
-                            try {
-                                mutex.acquire();
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            
-                            if (barco.getTipo() == 1){
-                                sitio.setBarcoPirata(barco);
-                                if(sitio.getBarcoNaval() == null){ 
-                                    break;
+                            if (barco.getRutaOrigen().split("-")[1].equals(sitio.getNombreSitio()) == false){
+                                try {
+                                    mutex.acquire();
+                                } catch (InterruptedException ex) {
+                                    Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                            }else if (barco.getTipo() == 2){
-                                sitio.setBarcoNaval(barco);
-                                if(sitio.getBarcoPirata() == null){
-                                    break;
+
+                                if (barco.getTipo() == 1){
+                                    sitio.setBarcoPirata(barco);
+                                    if(sitio.getBarcoNaval() != null){
+                                        barcoGUI.AparecerBarco(sitio.getPosX(), sitio.getPosY());
+                                        barco.irBatalla(sitio);
+                                        barcoGUI.ocultarPelea();
+                                    }
+                                }else if (barco.getTipo() == 2){
+                                    sitio.setBarcoNaval(barco);
+                                    if(sitio.getBarcoPirata() != null){
+                                        barcoGUI.AparecerBarco(sitio.getPosX(), sitio.getPosY());
+                                        barco.irBatalla(sitio);
+                                        barcoGUI.ocultarPelea();
+                                    }
                                 }
+                                mutex.release();
                             }
-                            
-                            barco.irBatalla(sitio);
-                            mutex.release();
                             break;
                         }
                     }      
@@ -301,14 +304,18 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                         System.out.println("Ruta: "+dato[1]);
                     }
                     try {
-                        mutex.acquire();
-                        if (barco.getTipo() == 1){
-                            sitioActual.setBarcoPirata(null);
-                        }else if (barco.getTipo() == 2){
-                            sitioActual.setBarcoNaval(null);
-                        }
-                        mutex.release();
                         Thread.sleep(5000);
+                        if (barco.getRutaOrigen().split("-")[1].equals(sitioActual.getNombreSitio()) == false){
+                            mutex.acquire();
+                        
+                            if (barco.getTipo() == 1){
+                                sitioActual.setBarcoPirata(null);
+                            }else if (barco.getTipo() == 2){
+                                sitioActual.setBarcoNaval(null);
+                            }
+                            mutex.release();
+                        }
+                        
                     } catch (InterruptedException ex) {
                         Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
                     }
