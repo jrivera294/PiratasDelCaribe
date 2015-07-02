@@ -238,6 +238,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             System.out.println("GANASTE: Finalizo el juego.");
                             ganadorVentana ganador = new ganadorVentana(null,true);
                             ganador.setjLabelGanador(barco.getNombre());
+                            ganador.setVisible(true);
                             //avisar a las demas maquinas que se termino el juego
                             return;
                         }else{
