@@ -22,7 +22,8 @@ import javax.swing.JPanel;
  * @author Jose Gabriel
  */
 public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
-    private Semaphore mutex = new Semaphore(1);
+    private Semaphore mutexPirata = new Semaphore(1);
+    private Semaphore mutexNaval = new Semaphore(1);
     private Maquina maquina;
     private PiratasGUI graphicInterface;
     
@@ -52,6 +53,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
         private BarcoGUI barcoGUI;
         private Maquina maquina;
         private int idOrigen;
+        private Sitio sitioActual;
 
         public Hilo(Barco barco, String nombreSitio, PiratasGUI graphicInterface, Maquina maquina, int idOrigen) {
             this.barco = barco;
@@ -188,12 +190,40 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                         if(sitio.getNombreSitio().equals(dato[1])){
                             System.out.println("Barco moviendose a: "+sitio.getNombreSitio());
                             barcoGUI.MoverBarco(sitio.getPosX(), sitio.getPosY());
+                            sitioActual = sitio;
                             
                             //Reviso el tipo de barco, si es Pirata (1) o Naval (2)
                             if (barco.getTipo() == 1){
                                 sitio.setBarcoPirata(barco);
+                                try {
+                                    try{
+                                        mutexNaval.acquire();
+                                        barco.irBatalla(sitio);
+                                    }finally{
+                                        mutexNaval.release();
+                                        if (mutexNaval != null){
+                                            mutexPirata.acquire();
+                                        }
+                                    }
+                                    
+                                } catch (InterruptedException ex) {
+                                    Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                             }else if (barco.getTipo() == 2){
                                 sitio.setBarcoNaval(barco);
+                                try {
+                                    try{
+                                        mutexPirata.acquire();
+                                        barco.irBatalla(sitio);
+                                    }finally{
+                                        mutexPirata.release();
+                                        if (mutexPirata != null){
+                                            mutexNaval.acquire();
+                                        }
+                                    }
+                                } catch (InterruptedException ex) {
+                                    Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                             }
                             
                             
@@ -284,11 +314,16 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
 
                         System.out.println("Ruta: "+dato[1]);
                     }
-                }
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
+                    try {
+                        if (barco.getTipo() == 1){
+                            sitioActual.setBarcoPirata(null);
+                        }else if (barco.getTipo() == 2){
+                            sitioActual.setBarcoNaval(null);
+                        }
+                        Thread.sleep(5000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }         
