@@ -7,19 +7,17 @@ package PiratasGUI;
 
 import PiratasLogic.Barco;
 import PiratasLogic.Maquina;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
 
 /**
  *
@@ -103,25 +101,19 @@ public class PiratasGUI extends javax.swing.JFrame {
         PanelPrincipal.setVisible(true);
         this.setBounds(0, 0, 1366, 768);
         
-        setBackgroundMusic("/images/musica.wav");
+     //  setBackgroundMusic("/images/musica.wav");
         
 
         //BarcoMovement = new Barco(PanelPrincipal, "Venganza Errante");
     }
     
-    public void setBackgroundMusic(String direccion){
-            AudioPlayer myBackgroundPlayer = AudioPlayer.player;
-            ContinuousAudioDataStream myLoop = null;
-            try {
-                  AudioStream myBackgroundMusic = new AudioStream(new FileInputStream(new File(getClass().getResource(direccion).toURI())));
-                  AudioData myData = myBackgroundMusic.getData();
-                  myLoop = new ContinuousAudioDataStream(myData);
-            }catch(Exception error){
-                System.out.println("File Not Found");
-                System.out.println(error);
-            }
-            myBackgroundPlayer.start(myLoop);  
-        }
+public void setBackgroundMusic(){
+        URL url = PiratasGUI.class.getResource(filePath + File.separator + "src" + File.separator + "images" + File.separator + "musica.wav");
+            AudioClip clip = Applet.newAudioClip(url);
+            AudioClip clip2 = Applet.newAudioClip(url);
+            clip.play(); 
+           System.out.println("end");
+ }
     
      public void setEstadoBarcoReset(Barco barco){
         switch(barco.getNombre()){
