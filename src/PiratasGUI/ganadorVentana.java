@@ -43,6 +43,7 @@ public class ganadorVentana extends javax.swing.JDialog {
         jLabelGanador.setFont(new java.awt.Font("Segoe UI Symbol", 0, 18)); // NOI18N
         jLabelGanador.setText("jLabel2");
 
+        jLabelCorazon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/corazon.png"))); // NOI18N
         jLabelCorazon.setMaximumSize(new java.awt.Dimension(200, 200));
         jLabelCorazon.setMinimumSize(new java.awt.Dimension(200, 200));
 
