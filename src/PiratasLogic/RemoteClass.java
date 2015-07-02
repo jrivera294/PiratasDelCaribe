@@ -22,8 +22,7 @@ import javax.swing.JPanel;
  * @author Jose Gabriel
  */
 public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
-    private Semaphore mutexPirata = new Semaphore(1);
-    private Semaphore mutexNaval = new Semaphore(1);
+    private Semaphore mutex = new Semaphore(1);
     private Maquina maquina;
     private PiratasGUI graphicInterface;
     
@@ -193,47 +192,27 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             sitioActual = sitio;
                             
                             //Reviso el tipo de barco, si es Pirata (1) o Naval (2)
+                            System.out.println("Barco Batalla Tipo: "+barco.getTipo());
+                            try {
+                                mutex.acquire();
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            
                             if (barco.getTipo() == 1){
-                                if(sitio.getBarcoNaval() == null){
+                                sitio.setBarcoPirata(barco);
+                                if(sitio.getBarcoNaval() == null){ 
                                     break;
                                 }
-                                
-                                sitio.setBarcoPirata(barco);
-                                try {
-                                    try{
-                                        mutexNaval.acquire();
-                                        barco.irBatalla(sitio);
-                                    }finally{
-                                        mutexNaval.release();
-                                        if (mutexNaval != null){
-                                            mutexPirata.acquire();
-                                        }
-                                    }
-                                    
-                                } catch (InterruptedException ex) {
-                                    Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
-                                }
                             }else if (barco.getTipo() == 2){
+                                sitio.setBarcoNaval(barco);
                                 if(sitio.getBarcoPirata() == null){
                                     break;
                                 }
-                                sitio.setBarcoNaval(barco);
-                                try {
-                                    try{
-                                        mutexPirata.acquire();
-                                        barco.irBatalla(sitio);
-                                    }finally{
-                                        mutexPirata.release();
-                                        if (mutexPirata != null){
-                                            mutexNaval.acquire();
-                                        }
-                                    }
-                                } catch (InterruptedException ex) {
-                                    Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
-                                }
                             }
                             
-                            
+                            barco.irBatalla(sitio);
+                            mutex.release();
                             break;
                         }
                     }      
@@ -322,11 +301,13 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                         System.out.println("Ruta: "+dato[1]);
                     }
                     try {
+                        mutex.acquire();
                         if (barco.getTipo() == 1){
                             sitioActual.setBarcoPirata(null);
                         }else if (barco.getTipo() == 2){
                             sitioActual.setBarcoNaval(null);
                         }
+                        mutex.release();
                         Thread.sleep(5000);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
