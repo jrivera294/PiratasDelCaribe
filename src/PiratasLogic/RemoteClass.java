@@ -172,7 +172,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             }else{
                                 System.out.println("Barco enviado exitosamente");
                                 barcoGUI.OcultarBarco();
-                                
+                                graphicInterface.setEstadoBarcoReset(barco.getNombre());
                                 if (barco.getTipo() == 1){
                                     maquina.getSitio().get(i).setBarcoPirata(null);
                                 }else if (barco.getTipo() == 2){
