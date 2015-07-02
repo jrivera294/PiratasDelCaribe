@@ -78,7 +78,7 @@ public class Barco implements java.io.Serializable{
         int bajaTripulacion=0, bajaMunicion=0, tesoro = 0;
         Barco barcoOponente = new Barco();
 
-
+        System.out.println("ESTAN PELEANDO");
         //Evaluo si los tipos de los barcos son diferentes, para ir a batalla.
         if (sitio.getBarcoPirata() != null){
             if (this.getTipo() != sitio.getBarcoPirata().getTipo()){

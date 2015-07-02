@@ -194,6 +194,10 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             
                             //Reviso el tipo de barco, si es Pirata (1) o Naval (2)
                             if (barco.getTipo() == 1){
+                                if(sitio.getBarcoNaval() == null){
+                                    break;
+                                }
+                                
                                 sitio.setBarcoPirata(barco);
                                 try {
                                     try{
@@ -210,6 +214,9 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                                     Logger.getLogger(RemoteClass.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }else if (barco.getTipo() == 2){
+                                if(sitio.getBarcoPirata() == null){
+                                    break;
+                                }
                                 sitio.setBarcoNaval(barco);
                                 try {
                                     try{
