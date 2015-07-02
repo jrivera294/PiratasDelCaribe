@@ -175,7 +175,7 @@ public class Barco implements java.io.Serializable{
             }
             sitio.getCofre().setCorazonPrincesa(0);
             this.cofre.setCorazonPrincesa((int)Cofre.pesoCorazon);
-            this.graphicInterface.setEstadoBarcos(this.nombre, this.tripulacion, this.municiones, this.comida, this.cofre.getCapacidadActual());
+            this.graphicInterface.setEstadoBarcos(this);
             return true;
         }
     
@@ -245,7 +245,7 @@ public class Barco implements java.io.Serializable{
             }
         }
         
-        this.graphicInterface.setEstadoBarcos(this.nombre, this.tripulacion, this.municiones, this.comida, this.cofre.getCapacidadActual());
+        this.graphicInterface.setEstadoBarcos(this);
 
         return false;
     }
@@ -275,7 +275,7 @@ public class Barco implements java.io.Serializable{
             this.barcoGUI.setCalamidadBarco("");
         }
         
-        this.graphicInterface.setEstadoBarcos(this.nombre, this.tripulacion, this.municiones, this.comida, this.cofre.getCapacidadActual());
+        this.graphicInterface.setEstadoBarcos(this);
         
         if(this.comida <= this.maxComida/3 || this.municiones <= this.maxMuniciones/3
            || this.tripulacion <= this.maxTripulacion/3){

@@ -118,7 +118,7 @@ public class Main {
             Cofre cBarco = new Cofre(barco.getCofre().getCapacidad());
             barco.setCofre(cBarco);
             barco.reabastecer();
-            barco.llamadaRMI("192.168.110.127","",1);
+            barco.llamadaRMI("192.168.110.121","",2);
         }
         /*
         Barco barco = objeto.getBarco().get(0);
