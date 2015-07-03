@@ -7,13 +7,16 @@ package PiratasGUI;
 
 import PiratasLogic.Barco;
 import PiratasLogic.Maquina;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -97,51 +100,62 @@ public class PiratasGUI extends javax.swing.JFrame {
         this.barcoInvencible_Cofre.setText("0");
         PanelPrincipal.setVisible(true);
         this.setBounds(0, 0, 1366, 768);
+        
+     //  setBackgroundMusic("/images/musica.wav");
+        
 
         //BarcoMovement = new Barco(PanelPrincipal, "Venganza Errante");
     }
     
-     public void setEstadoBarcoReset(String NombreBarco){
-        switch(NombreBarco){
+public void setBackgroundMusic(){
+        URL url = PiratasGUI.class.getResource(filePath + File.separator + "src" + File.separator + "images" + File.separator + "musica.wav");
+            AudioClip clip = Applet.newAudioClip(url);
+            AudioClip clip2 = Applet.newAudioClip(url);
+            clip.play(); 
+           System.out.println("end");
+ }
+    
+     public void setEstadoBarcoReset(Barco barco){
+        switch(barco.getNombre()){
             case "Venganza Errante":
                 piratax.setVisible(true);
-                this.barcoPirata_Tripulacion.setText("0");
-                this.barcoPirata_Municiones.setText("0");
-                this.barcoPirata_Comida.setText("0");
-                this.barcoPirata_Cofre.setText("0");
+                this.barcoPirata_Tripulacion.setText("0"+ " / "+ barco.getMaxTripulacion());
+                this.barcoPirata_Municiones.setText("0"+ " / "+ barco.getMaxMuniciones());
+                this.barcoPirata_Comida.setText("0"+ " / "+ barco.getMaxComida());
+                this.barcoPirata_Cofre.setText("0"+" / "+  barco.getCofre().getCapacidad());
                 break;
                 
             case "Interceptor":   
                 reinax.setVisible(true);
-                this.barcoInterceptor_Tripulacion.setText("0");
-                this.barcoInterceptor_Municiones.setText("0");
-                this.barcoInterceptor_Comida.setText("0");
-                this.barcoInterceptor_Cofre.setText("0");
+                this.barcoInterceptor_Tripulacion.setText("0"+ " / "+ barco.getMaxTripulacion());
+                this.barcoInterceptor_Municiones.setText("0"+ " / "+ barco.getMaxMuniciones());
+                this.barcoInterceptor_Comida.setText("0"+ " / "+ barco.getMaxComida());
+                this.barcoInterceptor_Cofre.setText("0"+" / "+  barco.getCofre().getCapacidad());
                 break;
                 
             case "Invencible":   
                 reinax2.setVisible(true);
-                this.barcoInvencible_Tripulacion.setText("0");
-                this.barcoInvencible_Municiones.setText("0");
-                this.barcoInvencible_Comida.setText("0");
-                this.barcoInvencible_Cofre.setText("0");
+                this.barcoInvencible_Tripulacion.setText("0"+ " / "+ barco.getMaxTripulacion());
+                this.barcoInvencible_Municiones.setText("0"+ " / "+ barco.getMaxMuniciones());
+                this.barcoInvencible_Comida.setText("0"+ " / "+ barco.getMaxComida());
+                this.barcoInvencible_Cofre.setText("0"+ " / "+  barco.getCofre().getCapacidad());
                 break;
             default:
                 reinax2.setVisible(true);
-                this.barcoInvencible_Tripulacion.setText("0");
-                this.barcoInvencible_Municiones.setText("0");
-                this.barcoInvencible_Comida.setText("0");
-                this.barcoInvencible_Cofre.setText("0");
+                this.barcoInvencible_Tripulacion.setText("0"+ " / "+ barco.getMaxTripulacion());
+                this.barcoInvencible_Municiones.setText("0"+ " / "+ barco.getMaxMuniciones());
+                this.barcoInvencible_Comida.setText("0"+ " / "+ barco.getMaxComida());
+                this.barcoInvencible_Cofre.setText("0"+" / "+  barco.getCofre().getCapacidad());
                 reinax.setVisible(true);
-                this.barcoInterceptor_Tripulacion.setText("0");
-                this.barcoInterceptor_Municiones.setText("0");
-                this.barcoInterceptor_Comida.setText("0");
-                this.barcoInterceptor_Cofre.setText("0");
+                this.barcoInterceptor_Tripulacion.setText("0"+ " / "+ barco.getMaxTripulacion());
+                this.barcoInterceptor_Municiones.setText("0"+ " / "+ barco.getMaxMuniciones());
+                this.barcoInterceptor_Comida.setText("0"+ " / "+ barco.getMaxComida());
+                this.barcoInterceptor_Cofre.setText("0"+" / "+  barco.getCofre().getCapacidad());
                 piratax.setVisible(true);
-                this.barcoPirata_Tripulacion.setText("0");
-                this.barcoPirata_Municiones.setText("0");
-                this.barcoPirata_Comida.setText("0");
-                this.barcoPirata_Cofre.setText("0");
+                this.barcoPirata_Tripulacion.setText("0"+ " / "+ barco.getMaxTripulacion());
+                this.barcoPirata_Municiones.setText("0"+ " / "+ barco.getMaxMuniciones());
+                this.barcoPirata_Comida.setText("0"+ " / "+ barco.getMaxComida());
+                this.barcoPirata_Cofre.setText("0"+" / "+  barco.getCofre().getCapacidad());
                 break;
         }
         this.repaint();
