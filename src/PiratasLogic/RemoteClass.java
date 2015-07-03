@@ -74,7 +74,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
             
             barco.setBarcoGUI(barcoGUI);
             barco.setGraphicInterface(graphicInterface);
-            this.graphicInterface.setEstadoBarcos(barco.getNombre(), barco.getTripulacion(), barco.getMuniciones(), barco.getComida(), barco.getCofre().getCapacidadActual());
+            this.graphicInterface.setEstadoBarcos(barco);
             
             //Obtener el id de la maquina de donde viene el barco
             /*if(barco.getCofre().getMapa() == null){
@@ -240,7 +240,7 @@ public class RemoteClass extends UnicastRemoteObject implements RMIInterface{
                             return;
                         }else{
                             barco.reabastecer();
-                            this.graphicInterface.setEstadoBarcos(barco.getNombre(), barco.getTripulacion(), barco.getMuniciones(), barco.getComida(), barco.getCofre().getCapacidadActual());
+                            this.graphicInterface.setEstadoBarcos(barco);
                             try {
                                 System.out.println("Barco: Reabasteciendo.");
                                 Thread.sleep(5000); 
