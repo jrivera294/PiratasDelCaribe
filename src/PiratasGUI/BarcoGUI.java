@@ -31,10 +31,13 @@ public class BarcoGUI extends javax.swing.JLabel{
       
     public BarcoGUI(JPanel p, String nombreBarco){
         panel = p;
+        panel.setLayout(null);
         barcoAnimated = new AnimationClass();
         labelBarco = new JLabel();
         
         labelPelea= new JLabel();
+        
+        labelPelea.setIcon(new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "pelea.png"));
         
         /*Imagenes*/
         switch (nombreBarco){
@@ -70,7 +73,6 @@ public class BarcoGUI extends javax.swing.JLabel{
     * @param y Posicion en el eje Y de la pantalla donde el Barco iniciara el movimiento
     */
    public void AparecerBarco(int x, int y){
-       panel.setLayout(null);
        panel.add(labelBarco);
        labelBarco.setBounds(x, y, 150, 136);
        labelBarco.setVisible(true);
@@ -78,11 +80,9 @@ public class BarcoGUI extends javax.swing.JLabel{
 
    }
    public void aparecerPelea(int x, int y){
-       this.add(labelPelea);
-        labelPelea.setIcon(new ImageIcon(filePath + File.separator + "src" + File.separator + "images" + File.separator + "pelea.png"));
+        panel.add(labelPelea);
         labelPelea.setBounds(x, y, 150, 136);
-        labelPelea.setVisible(true);
-       
+        labelPelea.setVisible(true);  
    }
    
    public void ocultarPelea(){
